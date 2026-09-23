@@ -8,53 +8,56 @@ export default {
     extend: {
       colors: {
         canvas: {
-          base: "#08080A",
-          surface: "#101114",
-          card: "#14161B",
-          subtle: "rgba(255, 255, 255, 0.02)",
-          highlight: "rgba(255, 255, 255, 0.05)",
+          base: "#FAF9F6",       // Warm archival gallery bone
+          surface: "#FFFFFF",    // Crisp museum white
+          card: "#FFFFFF",
+          muted: "#F3F2EC",      // Tactile off-white
+          subtle: "rgba(0, 0, 0, 0.02)",
+          highlight: "rgba(0, 0, 0, 0.04)",
         },
         border: {
-          subtle: "rgba(255, 255, 255, 0.08)",
-          muted: "rgba(255, 255, 255, 0.14)",
-          focus: "rgba(255, 255, 255, 0.3)",
+          subtle: "rgba(0, 0, 0, 0.08)",
+          muted: "rgba(0, 0, 0, 0.14)",
+          focus: "rgba(0, 0, 0, 0.35)",
         },
         accent: {
-          volt: "#D2FF00",
-          voltHover: "#B8E000",
-          glow: "rgba(210, 255, 0, 0.25)",
-          cyan: "#00F2FE",
-          purple: "#7928CA",
+          ink: "#0D0D11",        // Deep Obsidian Typography & Primary CTA
+          electric: "#0055FF",   // International Klein Blue
+          vermillion: "#E63B2E", // Editorial Vermillion
+          amber: "#D97706",
+          lime: "#65A30D",
         },
         text: {
-          primary: "#F5F5F7",
-          secondary: "#A1A1A6",
-          muted: "#636366",
+          primary: "#111114",    // Rich Charcoal Ink
+          secondary: "#4E4E56",  // Editorial Muted
+          muted: "#888892",      // Micro-caption & metadata
         }
       },
       fontFamily: {
-        display: ['Space Grotesk', 'Syne', 'system-ui', 'sans-serif'],
+        display: ['Syne', 'Space Grotesk', 'system-ui', 'sans-serif'],
+        serif: ['Bodoni Moda', 'Playfair Display', 'Georgia', 'serif'],
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
       letterSpacing: {
-        tightest: '-0.04em',
-        eyebrow: '0.2em',
+        tightest: '-0.045em',
+        tighter: '-0.03em',
+        eyebrow: '0.22em',
       },
       boxShadow: {
-        'inner-bevel': 'inset 0 1px 1px 0 rgba(255, 255, 255, 0.1)',
-        'glow-volt': '0 0 35px -5px rgba(210, 255, 0, 0.35)',
-        'card-elevated': '0 20px 40px -15px rgba(0, 0, 0, 0.7)',
+        'luxury-sm': '0 2px 8px -2px rgba(0, 0, 0, 0.05)',
+        'luxury-md': '0 12px 32px -8px rgba(0, 0, 0, 0.07)',
+        'luxury-lg': '0 24px 60px -12px rgba(0, 0, 0, 0.09)',
+        'inner-light': 'inset 0 1px 2px 0 rgba(255, 255, 255, 0.8)',
       },
       animation: {
-        'marquee': 'marquee 30s linear infinite',
-        'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'spin-slow': 'spin 20s linear infinite',
+        'spin-slow': 'spin 24s linear infinite',
+        'float-slow': 'float 6s ease-in-out infinite',
       },
       keyframes: {
-        marquee: {
-          '0%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(-50%)' },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-10px)' },
         }
       }
     },
