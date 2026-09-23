@@ -26,10 +26,7 @@ Scaffold the project inside its dedicated directory:
 mkdir -p <project-name>
 cd <project-name>
 
-# 2. Symlink .agents to ensure git-auto-sync hooks function seamlessly
-ln -s /root/projects/.agents .agents
-
-# 3. Initialize Vite with React SWC template in the project directory
+# 2. Initialize Vite with React SWC template in the project directory
 npm create vite@latest . -- --template react-swc
 
 # 4. Install core production dependencies
