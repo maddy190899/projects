@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 export const DynamicMotionGraphic = ({
-  src = "https://assets2.lottiefiles.com/packages/lf20_m6cu9zqm.json",
+  src = "https://assets5.lottiefiles.com/packages/lf20_5njp3vgg.json",
   data,
   className = "w-full h-full",
   loop = true,
   autoplay = true,
+  variant = "clinical"
 }) => {
   const [dotLottie, setDotLottie] = useState(null);
   const [hasError, setHasError] = useState(false);
@@ -19,7 +20,7 @@ export const DynamicMotionGraphic = ({
     op: 120,
     w: 400,
     h: 400,
-    nm: "QuantumCore",
+    nm: "DentalPulseCore",
     ddd: 0,
     assets: [],
     layers: [
@@ -27,7 +28,7 @@ export const DynamicMotionGraphic = ({
         ddd: 0,
         ind: 1,
         ty: 4,
-        nm: "OrbitalRing",
+        nm: "AuraWaveform",
         sr: 1,
         ks: {
           o: { k: 100 },
@@ -48,13 +49,13 @@ export const DynamicMotionGraphic = ({
               {
                 ty: "el",
                 p: { k: [0, 0] },
-                s: { k: [140, 140] }
+                s: { k: [160, 160] }
               },
               {
                 ty: "st",
-                c: { k: [0.23, 0.51, 0.96, 1] },
-                o: { k: 100 },
-                w: { k: 3 },
+                c: { k: [0.05, 0.65, 0.91, 1] }, // Cyan blue
+                o: { k: 90 },
+                w: { k: 2.5 },
                 lc: 2,
                 lj: 2
               },
