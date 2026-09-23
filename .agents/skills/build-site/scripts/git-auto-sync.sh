@@ -11,7 +11,7 @@ TARGET_FILE=$(echo "$PAYLOAD" | python3 -c 'import sys, json; data=json.load(sys
 
 # Initialize Git repository if not already present
 if [ ! -d ".git" ]; then
-  git init -b main
+  git init -b main >/dev/null 2>&1
   git config user.name "Antigravity Agent"
   git config user.email "agent@antigravity.internal"
 fi
@@ -51,8 +51,8 @@ else
 fi
 
 # Stage all changes and commit
-git add -A
-git commit -m "$COMMIT_MSG" || true
+git add -A >/dev/null 2>&1
+git commit -m "$COMMIT_MSG" >/dev/null 2>&1 || true
 
 # Push upstream if remote origin is established
 if git remote get-url origin >/dev/null 2>&1; then
