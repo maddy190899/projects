@@ -15,7 +15,7 @@ export const MagneticButton = ({
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const springConfig = { damping: 14, stiffness: 160, mass: 0.1 };
+  const springConfig = { damping: 15, stiffness: 170, mass: 0.1 };
   const springX = useSpring(x, springConfig);
   const springY = useSpring(y, springConfig);
 
@@ -24,9 +24,8 @@ export const MagneticButton = ({
     const { left, top, width, height } = ref.current.getBoundingClientRect();
     const centerX = left + width / 2;
     const centerY = top + height / 2;
-    // Dampen pull
-    x.set((e.clientX - centerX) * 0.32);
-    y.set((e.clientY - centerY) * 0.32);
+    x.set((e.clientX - centerX) * 0.3);
+    y.set((e.clientY - centerY) * 0.3);
   };
 
   const handleMouseLeave = () => {
@@ -36,13 +35,15 @@ export const MagneticButton = ({
 
   const variantStyles = {
     primary:
-      'bg-accent-volt text-black font-semibold hover:bg-accent-voltHover shadow-glow-volt border border-accent-volt/50',
+      'bg-accent-ink text-white font-medium hover:bg-black shadow-luxury-md border border-black/80',
     secondary:
-      'bg-canvas-card/90 text-text-primary border border-border-subtle hover:border-border-focus hover:bg-canvas-surface',
+      'bg-canvas-surface text-text-primary border border-border-muted hover:border-text-primary hover:bg-canvas-muted shadow-luxury-sm',
+    electric:
+      'bg-accent-electric text-white font-medium hover:brightness-110 shadow-luxury-md border border-accent-electric',
     outline:
-      'bg-transparent text-text-primary border border-border-subtle hover:border-text-primary hover:bg-white/[0.04]',
+      'bg-transparent text-text-primary border border-border-muted hover:border-text-primary hover:bg-black/[0.03]',
     ghost:
-      'bg-transparent text-text-secondary hover:text-text-primary hover:bg-white/[0.03]',
+      'bg-transparent text-text-secondary hover:text-text-primary hover:bg-black/[0.03]',
   };
 
   return (
@@ -56,7 +57,7 @@ export const MagneticButton = ({
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
       className={cn(
-        'group relative inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full text-xs uppercase tracking-widest font-mono transition-all duration-300 select-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-volt focus-visible:ring-offset-2 focus-visible:ring-offset-canvas-base',
+        'group relative inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full text-xs uppercase tracking-widest font-mono transition-all duration-300 select-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-ink focus-visible:ring-offset-2',
         variantStyles[variant] || variantStyles.primary,
         disabled && 'opacity-50 cursor-not-allowed pointer-events-none',
         className
