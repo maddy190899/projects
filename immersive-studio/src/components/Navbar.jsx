@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { MagneticButton } from './MagneticButton';
-import { Volume2, VolumeX, Menu, X, Sparkles, Activity, Layers, Cpu, ArrowUpRight } from 'lucide-react';
+import { VolumeX, Menu, X, ArrowUpRight } from 'lucide-react';
 import { sound } from '../utils/soundEngine';
 
-export const Navbar = ({ onOpenInquiry, soundActive, setSoundActive, motionReduced, setMotionReduced }) => {
+export const Navbar = ({ onOpenInquiry, soundActive, setSoundActive }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [studioTimes, setStudioTimes] = useState({
@@ -130,7 +130,7 @@ export const Navbar = ({ onOpenInquiry, soundActive, setSoundActive, motionReduc
           ))}
         </nav>
 
-        {/* Controls: Audio Toggle + Motion + Project CTA */}
+        {/* Controls: Audio Toggle + Project CTA */}
         <div className="flex items-center gap-3">
           {/* Audio Engine Toggle */}
           <button
