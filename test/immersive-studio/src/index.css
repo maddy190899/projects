@@ -19,62 +19,97 @@
 
   body {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    background-color: #09090b;
-    color: #f4f3ef;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    background-color: #FAF7F2;
+    color: #1C1917;
     overflow-x: hidden;
   }
 
-  h1, h2, h3, .font-display {
-    font-family: 'Syne', sans-serif;
-    letter-spacing: -0.035em;
-  }
-
-  .font-serif-editorial {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-style: italic;
-  }
-
-  .font-mono-tag {
-    font-family: 'JetBrains Mono', monospace;
+  h1, h2, h3, .font-human {
+    font-family: 'Fraunces', Georgia, serif;
     letter-spacing: -0.02em;
   }
+
+  .font-handwriting {
+    font-family: 'Caveat', cursive;
+  }
 }
 
-/* Subtle Film Grain Noise Texture */
-.bg-noise {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+/* Warm Paper & Linen Texture */
+.bg-warm-paper {
+  background-color: #FAF7F2;
+  background-image: radial-gradient(#E8E1D5 0.75px, transparent 0.75px);
+  background-size: 20px 20px;
 }
 
-/* Crisp Architectural Borders */
-.border-chalk {
-  border-color: rgba(244, 243, 239, 0.12);
+/* Tactile Clay & Card Shadows */
+.clay-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(28, 25, 23, 0.08);
+  box-shadow: 0 4px 20px -2px rgba(28, 25, 23, 0.05), 0 2px 6px -1px rgba(28, 25, 23, 0.03);
 }
 
-.border-chalk-strong {
-  border-color: rgba(244, 243, 239, 0.22);
+.clay-card-interactive {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Luxury Editorial Image Reveal Hover */
-.img-editorial-zoom {
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+.clay-card-interactive:hover {
+  transform: translateY(-4px) rotate(-0.5deg);
+  box-shadow: 0 16px 32px -4px rgba(28, 25, 23, 0.09), 0 4px 12px -2px rgba(28, 25, 23, 0.04);
 }
 
-.group:hover .img-editorial-zoom {
-  transform: scale(1.06);
+/* Polaroid Photo Style */
+.polaroid-frame {
+  background: #FFFFFF;
+  padding: 12px 12px 28px 12px;
+  box-shadow: 0 8px 24px -4px rgba(28, 25, 23, 0.12), 0 2px 6px -1px rgba(28, 25, 23, 0.06);
+  border: 1px solid rgba(28, 25, 23, 0.06);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* Custom Scrollbar */
+.polaroid-frame:hover {
+  transform: scale(1.03) rotate(1deg);
+  box-shadow: 0 20px 36px -6px rgba(28, 25, 23, 0.16);
+  z-index: 10;
+}
+
+/* Subtle Tape Washi Accent */
+.washi-tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 90px;
+  height: 24px;
+  background-color: rgba(230, 220, 200, 0.75);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  backdrop-filter: blur(1px);
+}
+
+/* Tactile Pill Buttons */
+.btn-warm-primary {
+  background-color: #1C1917;
+  color: #FAF7F2;
+  transition: all 0.25s ease;
+}
+
+.btn-warm-primary:hover {
+  background-color: #E05A47;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -4px rgba(224, 90, 71, 0.35);
+}
+
+/* Custom Soft Scrollbar */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #09090b;
+  background: #FAF7F2;
 }
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
-  border-radius: 2px;
+  background: #D6CEBE;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #52525b;
+  background: #A89F8D;
 }
