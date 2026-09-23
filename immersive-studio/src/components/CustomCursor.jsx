@@ -14,7 +14,6 @@ export const CustomCursor = () => {
   const smoothY = useSpring(cursorY, springConfig);
 
   useEffect(() => {
-    // Only mount on fine pointer devices (desktop / trackpad / mouse)
     const isFinePointer = window.matchMedia('(pointer: fine)').matches;
     setIsPointerDevice(isFinePointer);
     if (!isFinePointer) return;
@@ -35,7 +34,9 @@ export const CustomCursor = () => {
         target.closest('button') ||
         target.closest('a') ||
         target.closest('[role="button"]') ||
-        target.closest('.interactive-card')
+        target.closest('.interactive-card') ||
+        target.closest('input') ||
+        target.closest('textarea')
       ) {
         setIsHovered(true);
       } else {
@@ -67,12 +68,12 @@ export const CustomCursor = () => {
           translateY: '-50%',
         }}
         animate={{
-          scale: isHovered ? 1.75 : 1,
-          borderColor: isHovered ? 'rgba(210, 255, 0, 0.9)' : 'rgba(255, 255, 255, 0.25)',
-          backgroundColor: isHovered ? 'rgba(210, 255, 0, 0.08)' : 'rgba(255, 255, 255, 0.02)',
+          scale: isHovered ? 1.6 : 1,
+          borderColor: isHovered ? 'rgba(0, 85, 255, 0.7)' : 'rgba(17, 17, 20, 0.25)',
+          backgroundColor: isHovered ? 'rgba(0, 85, 255, 0.05)' : 'transparent',
         }}
         transition={{ duration: 0.18, ease: 'easeOut' }}
-        className="w-10 h-10 rounded-full border border-white/20 backdrop-blur-[1px]"
+        className="w-9 h-9 rounded-full border border-black/20"
       />
       {/* Center pinpoint */}
       <motion.div
@@ -86,7 +87,7 @@ export const CustomCursor = () => {
           scale: isHovered ? 0 : 1,
           opacity: isHovered ? 0 : 1,
         }}
-        className="w-1.5 h-1.5 rounded-full bg-accent-volt"
+        className="w-1.5 h-1.5 rounded-full bg-accent-ink"
       />
     </div>
   );
