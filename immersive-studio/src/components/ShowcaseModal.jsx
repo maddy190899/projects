@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, Cpu, Activity, Award, CheckCircle, ArrowRight, Layers, Eye } from 'lucide-react';
+import { X, Cpu, Activity, Award, CheckCircle, ArrowRight } from 'lucide-react';
 import { MagneticButton } from './MagneticButton';
 import { sound } from '../utils/soundEngine';
 
 export const ShowcaseModal = ({ project, isOpen, onClose, onCommissionBuild }) => {
-  const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'architecture' | 'simulation'
+  const [activeTab, setActiveTab] = useState('overview');
 
   if (!isOpen || !project) return null;
 
