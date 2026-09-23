@@ -1,118 +1,143 @@
 export const STUDIO_METRICS = [
-  { value: "8×", label: "Awwwards SOTD", detail: "International Site of the Day honors" },
-  { value: "12×", label: "FWA of the Day", detail: "Cutting-edge digital creativity accolades" },
-  { value: "+240%", label: "Average Conversion Lift", detail: "Empirically measured post-launch growth" },
-  { value: "<0.9s", label: "Core Web Vitals LCP", detail: "Ultra-fast global edge asset delivery" },
+  { value: "14×", label: "Awwwards SOTD", detail: "Site of the Day & Developer Honors" },
+  { value: "19×", label: "FWA of the Day", detail: "Global Cutting-Edge Web Production" },
+  { value: "+310%", label: "Average Client ROI", detail: "Empirically measured commercial lift" },
+  { value: "0.78s", label: "Global Edge LCP", detail: "60/120fps GPU layer isolation" },
 ];
 
 export const CLIENT_LOGOS = [
+  "KURA GENÈVE",
   "AETHER SPATIAL",
-  "VANGUARD WEALTH",
-  "KURA HOROLOGY",
-  "NEUROPULSE AI",
-  "SYNAPSE ROBOTICS",
-  "SOLSTICE LABS"
+  "CHRONOS HYPERCARS",
+  "NEUROPULSE LABS",
+  "VALKYRIE AUDIO",
+  "MONOLITH ARCHITECTURE"
 ];
 
 export const CASE_STUDIES = [
   {
-    id: "aether-spatial",
-    title: "Aether Spatial",
-    client: "Aether Architectural Systems",
-    category: "Spatial / 3D",
+    id: "kura-geneve",
+    title: "Kura Genève — The Escapement of Time",
+    client: "Kura Haute Horlogerie",
+    category: "Haute Luxury & 3D",
     year: "2026",
-    heroImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80",
-    secondaryImage: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80",
-    tagline: "Next-generation 3D architectural configurator and interactive spatial showroom for ultra-prime real estate.",
-    summary: "Architecting a GPU-accelerated digital twin platform that allows global private buyers to inspect daylight studies, material variations, and cantilevered structures in real-time WebGL.",
-    results: [
-      { metric: "+310%", label: "Qualified Lead Volume" },
-      { metric: "$42M", label: "Reservations in Q1" },
-      { metric: "0.82s", label: "Largest Contentful Paint" },
-      { metric: "99.8%", label: "Mobile Frame Rate Stability" }
-    ],
-    techStack: ["React 19", "WebGL / Three.js", "GSAP ScrollTrigger", "Lenis", "Tailwind CSS"],
-    awards: ["Awwwards Site of the Day", "FWA of the Day", "Developer Award (Score 8.42)"],
-    testimonial: {
-      quote: "Immersive Studio transformed how billionaire purchasers evaluate prime architectural residences. The interactive kinetic fluidity eliminated physical distance and drove 42 million dollars in closed commitments within 90 days.",
-      author: "Julian Thorne",
-      role: "Chief Executive Officer",
-      company: "Aether Architectural Systems"
-    }
-  },
-  {
-    id: "vanguard-wealth",
-    title: "Vanguard Private Wealth",
-    client: "Vanguard Capital Partners",
-    category: "Fintech & SaaS",
-    year: "2026",
-    heroImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80",
-    secondaryImage: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1200&q=80",
-    tagline: "Ultra-high-net-worth portfolio telemetry and algorithmic scenario modeling platform.",
-    summary: "Bridging institutional-grade financial intelligence with visceral, dark-field generative visualization to turn complex asset allocations into intuitive decision surfaces.",
-    results: [
-      { metric: "+185%", label: "Institutional Onboarding" },
-      { metric: "42ms", label: "Interaction to Next Paint (INP)" },
-      { metric: "$1.4B+", label: "Assets Visualized" },
-      { metric: "0.00", label: "Cumulative Layout Shift (CLS)" }
-    ],
-    techStack: ["Next.js 15 App Router", "Canvas Telemetry", "Framer Motion", "Tailwind CSS"],
-    awards: ["Webby Honoree - Financial UX", "CSS Design Awards Best UI/UX"],
-    testimonial: {
-      quote: "Our institutional clients demand both aesthetic dignity and zero-latency performance. Immersive Studio engineered a terminal experience that sets a new benchmark in global private wealth.",
-      author: "Victoria Sterling",
-      role: "Managing Partner",
-      company: "Vanguard Capital Partners"
-    }
-  },
-  {
-    id: "kura-horology",
-    title: "Kura Haute Horlogerie",
-    client: "Kura Genève",
-    category: "Haute Luxury",
-    year: "2025",
     heroImage: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1600&q=80",
     secondaryImage: "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?auto=format&fit=crop&w=1200&q=80",
-    tagline: "Kinetic digital flagship featuring real-time escapement physics and bespoke bespoke configurators.",
-    summary: "Replicating Swiss watchmaking micro-mechanics on the web with interactive tourbillon simulations, tactile haptic feedback, and frictionless concierge reservations.",
+    tagline: "Swiss watchmaking micro-mechanics simulated in real-time WebGL with tactile escapement physics.",
+    summary: "For a 180-year-old Swiss maison, we built an interactive digital flagship where collectors can dissemble tourbillon calibers down to the gear teeth, customize rose gold alloys, and reserve one-of-one allocations.",
     results: [
-      { metric: "+290%", label: "Checkout Conversion Lift" },
-      { metric: "4.8 min", label: "Average Session Duration" },
-      { metric: "100%", label: "Bespoke Production Sold Out" },
-      { metric: "120 fps", label: "Micro-Interaction Smoothness" }
+      { metric: "$42M+", label: "Q1 Private Reservations" },
+      { metric: "+340%", label: "Average Session Duration" },
+      { metric: "120 FPS", label: "Micro-Gear Simulation" },
+      { metric: "0.81s", label: "Largest Contentful Paint" }
     ],
-    techStack: ["React", "Custom Shaders", "Lenis Momentum Scroll", "Headless Commerce"],
-    awards: ["Awwwards SOTD", "FWA of the Month Nominee", "W3 Gold Winner"],
+    techStack: ["WebGL / Three.js", "GLSL Shaders", "GSAP ScrollTrigger", "Lenis Momentum", "Tailwind CSS"],
+    awards: ["Awwwards Site of the Day (8.62)", "FWA of the Month Nominee", "CSSDA Best UI/UX"],
     testimonial: {
-      quote: "Every micro-millimeter of our mechanical calibers is reflected in Immersive Studio's digital craftsmanship. It is rare to encounter engineers who respect horological perfection as deeply as code.",
+      quote: "Most agencies offered us a flat e-commerce storefront. Immersive Studio built an interactive cathedral of mechanical watchmaking that sold out our entire annual allocation within four weeks.",
       author: "Henri Laurent",
       role: "Creative Director",
       company: "Kura Genève"
     }
   },
   {
-    id: "neuropulse-ai",
-    title: "NeuroPulse Systems",
-    client: "NeuroPulse AI",
-    category: "Fintech & SaaS",
+    id: "aether-spatial",
+    title: "Aether — Architectural Spatial Twin",
+    client: "Aether Architectural Systems",
+    category: "Spatial & Real Estate",
     year: "2026",
-    heroImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1600&q=80",
-    secondaryImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
-    tagline: "Autonomous neural agent orchestration suite and live multi-modal intelligence console.",
-    summary: "Designing the enterprise command center for autonomous AI reasoning pipelines, combining high-salience Bento topologies with reactive streaming node graphs.",
+    heroImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80",
+    secondaryImage: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80",
+    tagline: "Ultra-prime architectural configurator with live daylight raycasting and material acoustics.",
+    summary: "An interactive spatial platform engineered for ultra-high-net-worth real estate buyers. Clients walk through architectural elevations, test sunrise-to-sunset lighting studies, and inspect cantilevered glass facades from Tokyo to Zurich.",
     results: [
-      { metric: "4.2×", label: "Active User Retention" },
-      { metric: "<1.1s", label: "Global Edge LCP" },
-      { metric: "+380%", label: "Enterprise Inquiries" },
-      { metric: "60 fps", label: "Live Node Graph Physics" }
+      { metric: "+310%", label: "Qualified Buyer Inquiries" },
+      { metric: "$78M", label: "Compound Reservations" },
+      { metric: "0.75s", label: "Global Edge LCP" },
+      { metric: "0.00", label: "Cumulative Layout Shift" }
     ],
-    techStack: ["React 19", "WebSockets", "GSAP Flip", "Tailwind CSS", "Lucide Vector"],
-    awards: ["Awwwards Developer Award", "FWA of the Day"],
+    techStack: ["React 19", "Three.js Raycasting", "Procedural Lighting", "Lenis", "GSAP"],
+    awards: ["Awwwards Developer Award", "FWA of the Day", "Webby Honoree"],
     testimonial: {
-      quote: "Most AI interfaces look like sterile dev consoles. Immersive Studio gave our neural agents a cinematic presence that captivated Fortune 50 enterprise procurement teams.",
+      quote: "The interactive spatial fidelity eliminated physical distance for our billionaire buyers. It feels less like a website and more like standing inside the physical architecture.",
+      author: "Julian Thorne",
+      role: "CEO & Principal Architect",
+      company: "Aether Systems"
+    }
+  },
+  {
+    id: "chronos-hypercars",
+    title: "Chronos — Aerodynamic Hypercar Studio",
+    client: "Chronos Motorwerks",
+    category: "Automotive & WebGL",
+    year: "2025",
+    heroImage: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1600&q=80",
+    secondaryImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+    tagline: "Photorealistic WebGL vehicle configurator with procedural paint shaders and wind-tunnel physics.",
+    summary: "We engineered a GPU-accelerated interactive showroom allowing exotic vehicle buyers to sculpt custom carbon-fiber aero packages, adjust active spoilers, and simulate wind-tunnel aerodynamic vortexes in real time.",
+    results: [
+      { metric: "2.4M", label: "Interactive Config Sessions" },
+      { metric: "100%", label: "Production Run Sold Out" },
+      { metric: "60 FPS", label: "Mobile WebGL Frame Rate" },
+      { metric: "+290%", label: "Press & Social Viral Lift" }
+    ],
+    techStack: ["Custom GLSL Shaders", "WebGL", "Framer Motion", "Lenis", "Web Audio API"],
+    awards: ["FWA of the Day", "Awwwards SOTD", "Cutting Edge Project of the Year"],
+    testimonial: {
+      quote: "The car looks and sounds alive. The paint shaders react to cursor light sources with optical accuracy that shocked our automotive design studio.",
+      author: "Alexander Vance",
+      role: "Head of Design",
+      company: "Chronos Motorwerks"
+    }
+  },
+  {
+    id: "neuropulse-labs",
+    title: "NeuroPulse — Swarm Intelligence Console",
+    client: "NeuroPulse Systems",
+    category: "AI & Fintech",
+    year: "2026",
+    heroImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80",
+    secondaryImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80",
+    tagline: "Autonomous neural agent orchestration suite with real-time topological node physics.",
+    summary: "Translating multi-agent cognitive reasoning into a visceral, sci-fi command console. We turned dense machine learning metrics into responsive interactive particle node graphs that captivated Fortune 50 enterprise procurement teams.",
+    results: [
+      { metric: "4.8×", label: "Daily Active User Retention" },
+      { metric: "+420%", label: "Enterprise Inquiries" },
+      { metric: "38ms", label: "Interaction to Next Paint" },
+      { metric: "100k+", label: "Live Node Graph Objects" }
+    ],
+    techStack: ["Canvas 2D Engine", "React 19", "WebSockets", "GSAP Ticker", "Tailwind CSS"],
+    awards: ["Awwwards Site of the Day", "FWA of the Day", "Webby Winner"],
+    testimonial: {
+      quote: "Most AI interfaces look like sterile developer terminals. Immersive Studio gave our neural agents a cinematic presence that made enterprise buyers immediately understand the power of our tech.",
       author: "Dr. Aris Thorne",
       role: "VP of Product",
       company: "NeuroPulse Systems"
+    }
+  },
+  {
+    id: "valkyrie-audio",
+    title: "Valkyrie — Generative Spatial Sound",
+    client: "Valkyrie Sound Labs",
+    category: "Creative Audio & WebGL",
+    year: "2025",
+    heroImage: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1600&q=80",
+    secondaryImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=80",
+    tagline: "In-browser procedural synthesizer with real-time reactive 3D acoustic waveforms.",
+    summary: "Built for Grammy-winning sound designers and avant-garde producers. Visitors sculpt acoustic frequencies directly in the browser with real-time Web Audio API synthesis and responsive 3D harmonic mesh distortions.",
+    results: [
+      { metric: "820k+", label: "Synthesizer Creations" },
+      { metric: "+480%", label: "Hardware Pre-Orders" },
+      { metric: "0.72s", label: "Largest Contentful Paint" },
+      { metric: "99.9%", label: "Audio Thread Stability" }
+    ],
+    techStack: ["Web Audio API", "Three.js Particle Cloud", "Lenis", "React 19", "GSAP"],
+    awards: ["Awwwards Experimental Site of the Month", "FWA of the Day"],
+    testimonial: {
+      quote: "They didn't just build our site—they engineered an interactive musical instrument that became the centerpiece of our global product launch.",
+      author: "Mikael Voss",
+      role: "Founder & Chief Acoustician",
+      company: "Valkyrie Sound Labs"
     }
   }
 ];
@@ -122,76 +147,76 @@ export const SERVICES = [
     id: "creative-direction",
     number: "01",
     title: "Haute Creative Direction & Brand Architecture",
-    description: "Translating brand ethos into an authoritative digital reality. We develop visual identities that dominate high-salience markets through typographic tension and bespoke art direction.",
+    description: "We don't do templates. We craft unforgettable visual identities that command category leadership through monumental typography, visceral composition, and editorial distinction.",
     deliverables: [
-      "Dynamic Typographic System Design",
-      "Bespoke Chromatic & Visual Tokens",
-      "Asymmetric Bento Hierarchy & Art Direction",
-      "High-Fidelity Interactive Design Prototypes"
+      "Custom Typographic Systems & Monoline Glyphs",
+      "Cinematic Art Direction & Spatial Layouts",
+      "Asymmetric Bento Grids & Specular Depth",
+      "Motion Design Guidelines & Brand Bible"
     ],
-    impact: "+140% Brand Salience & Perceived Value"
+    impact: "Dominant Brand Salience & Cult Followings"
   },
   {
     id: "kinetic-engineering",
     number: "02",
-    title: "Kinetic Motion & WebGL 3D Engineering",
-    description: "Bridging code with physical kinematics. We craft GPU-composited 60/120fps motion systems, virtualized momentum scrolling, and bespoke WebGL shaders that elevate interfaces into cinematic worlds.",
+    title: "WebGL 3D & GPU Kinetic Engineering",
+    description: "Bridging the gap between software engineering and visceral cinema. We construct GPU-composited 60/120fps motion systems, virtualized momentum scrolling, and custom GLSL shaders.",
     deliverables: [
-      "Lenis + GSAP Render Ticker Synchronization",
-      "Custom WebGL / Three.js Shaders & Models",
-      "Quintic Deceleration Curves & Parallax Planes",
-      "Prefers-Reduced-Motion WCAG Fallbacks"
+      "Lenis Smooth Scroll + Centralized GSAP Ticker",
+      "Custom Three.js & GLSL Shader Pipelines",
+      "Interactive 3D Product Configurators",
+      "Hardware Layer Isolation & Zero Layout Thrashing"
     ],
-    impact: "60/120fps Smoothness with Zero Layout Thrashing"
+    impact: "Buttery 120 FPS Fluidity Across All Devices"
   },
   {
-    id: "behavioral-ux",
+    id: "conversion-science",
     number: "03",
-    title: "Neuro-Perceptual UX & Conversion Architecture",
-    description: "Structuring cognitive pathways using empirical psychology. We apply Gestalt grouping, Fitts's Law magnetic affordance, and Hick-Hyman cognitive minimization to accelerate user decision velocity.",
+    title: "Neuro-Perceptual UX & Conversion Science",
+    description: "Aesthetics without conversion is vanity. We map cognitive visual pathways using Gestalt grouping, Fitts's Law magnetic cursor spring affordance, and Hick-Hyman cognitive minimization.",
     deliverables: [
-      "Progressive Disclosure Funnel Sequencing",
-      "Zeigarnik Milestone Tracking UI (01/04)",
-      "Magnetic Cursor Spring Affordance",
-      "Fitts's Law Hitbox Extension (≥12px)"
+      "Progressive Disclosure Funnel Engineering",
+      "Zeigarnik Milestone Intake Wizards (01/04)",
+      "Magnetic Hit-Box Expansion (≥12px)",
+      "Peak-End Interaction Choreography"
     ],
-    impact: "+240% Average Multi-Stage Conversion Lift"
+    impact: "+310% Average Multi-Stage Conversion Lift"
   },
   {
-    id: "performance-architecture",
+    id: "creative-lab",
     number: "04",
-    title: "Core Web Vitals & Production Resilience",
-    description: "Ensuring award-winning aesthetics never compromise technical performance. We target sub-second Largest Contentful Paint (LCP), zero layout shifts, and full semantic accessibility.",
+    title: "Creative Technologist Lab & Audio Synthesis",
+    description: "Pushing the browser to its absolute technological frontier. From procedural Web Audio API soundscapes to generative particle physics and interactive spatial tools.",
     deliverables: [
-      "LCP < 1.2s via Pre-rendered Edge Assets",
-      "CLS < 0.02 Layout Stability Engineering",
-      "W3C Valid Semantic HTML5 & Schema.org JSON-LD",
-      "WCAG 2.2 Level AA Keyboard Trapping Protection"
+      "Procedural Web Audio Engine (Zero Assets)",
+      "Real-time Generative Particle Simulations",
+      "Interactive Shader Controls & Sandboxes",
+      "Sub-Second Core Web Vitals (LCP < 0.8s, CLS 0.00)"
     ],
-    impact: "Top 1% Global Google Core Web Vitals Percentile"
+    impact: "Websites That Win SOTD & Redefine Categories"
   }
 ];
 
 export const PHILOSOPHY_PRINCIPLES = [
   {
+    law: "Websites Should Feel Alive",
+    concept: "Static flat pages are digital brochures from 2012. Modern humans expect digital surfaces to respond with organic physics, tactile haptics, and cinematic rhythm.",
+    implementation: "Every button, card, and scroll delta is wired to physical spring deceleration and instant audio-visual feedback."
+  },
+  {
     law: "The 70% Evaluative Rule",
-    concept: "Design (40%) and Usability (30%) constitute 70% of award juries and consumer retention. Visual novelty never compensates for architectural defects.",
-    implementation: "Every kinetic interaction is built upon strict semantic markup, fluid typography, and immediate wayfinding."
+    concept: "Design (40%) and Usability (30%) decide whether visitors stay or bounce within 3 seconds. Visual novelty cannot save an interface that drops frames or confuses the user.",
+    implementation: "Strict W3C semantics, sub-second LCP, WCAG 2.2 AA accessibility, and zero layout shift."
   },
   {
-    law: "Fitts's Law & Motor Ergonomics",
-    concept: "Movement time to target is minimized by expanding interactive boundaries beyond visible button borders.",
-    implementation: "Invisible touch expansion (≥12px) paired with desktop magnetic cursor dampening pulls conversion targets toward user attention."
+    law: "Hick-Hyman Cognitive Velocity",
+    concept: "Every unnecessary choice burns mental CPU cycles. Cognitive friction kills high-ticket conversions faster than bad copy.",
+    implementation: "We restrict immediate root choices to ≤ 5, staging operational depth behind contextual progressive drawers."
   },
   {
-    law: "Hick-Hyman Cognitive Minimization",
-    concept: "Decision velocity degrades logarithmically with each selectable alternative.",
-    implementation: "We restrict immediate root navigation choices to 5 or fewer, staging complex information behind contextual progressive disclosure drawers."
-  },
-  {
-    law: "Kinematic Deceleration Physics",
-    concept: "Linear motion looks synthetic and machine-like; natural organic motion follows extended braking curves.",
-    implementation: "Standardizing all kinetic timelines on cubic-bezier(0.16, 1, 0.3, 1) and exponential deceleration."
+    law: "Kinematics Over Cosmetics",
+    concept: "Linear CSS animations look mechanical and cheap. Natural motion follows extended braking curves that communicate mass and inertia.",
+    implementation: "Standardizing on quintic deceleration cubic-bezier(0.16, 1, 0.3, 1) and exponential damping."
   }
 ];
 
@@ -199,52 +224,52 @@ export const TEAM_MEMBERS = [
   {
     name: "Elena Rostova",
     role: "Founding Partner & Executive Creative Director",
-    credentials: "Ex-Locomotive · Awwwards Jury Member 2026",
-    bio: "Pioneering visual tension and editorial typographic systems across haute luxury and architectural technology for 12+ years.",
+    credentials: "Ex-Locomotive · Awwwards Jury Member",
+    bio: "Obsessed with typographic tension, editorial layout rhythm, and building digital flagships that command cultural respect.",
     image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"
   },
   {
     name: "Marcus Vance",
-    role: "Head of Creative Engineering & WebGL",
-    credentials: "Ex-Active Theory · 9x FWA Winner",
-    bio: "Master of GPU layer isolation, custom GLSL shaders, and hardware-accelerated interactive web canvases.",
+    role: "Head of WebGL & Creative Technology",
+    credentials: "Ex-Active Theory · 19x FWA Winner",
+    bio: "Pioneering GPU-accelerated web experiences, custom raycasting shaders, and real-time physical simulation in the browser.",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80"
   },
   {
-    name: "Soren Lindqvist",
-    role: "Principal Behavioral UX Scientist",
-    credentials: "Cognitive Ergonomics Researcher · Ex-Spotify",
-    bio: "Applying pre-attentive neuro-perceptual models and Gestalt grouping to maximize conversion velocity in complex digital funnels.",
+    name: "Kai Tanaka",
+    role: "Principal Shader Artisan & Audio Engineer",
+    credentials: "Ex-Monopo Tokyo · Webby Winner",
+    bio: "Crafting procedural audio synthesis, generative canvas mathematics, and organic liquid visual effects.",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80"
   },
   {
-    name: "Aiko Takahashi",
-    role: "Lead Kinetic Motion Choreographer",
-    credentials: "GSAP Certified Lead · Webby Nominee",
-    bio: "Orchestrating scroll virtualization, quintic kinematics, and zero-latency micro-interactions across high-density interfaces.",
+    name: "Dr. Soren Lindqvist",
+    role: "Principal Behavioral UX Scientist",
+    credentials: "Cognitive Ergonomics Researcher",
+    bio: "Applying pre-attentive neuro-perceptual models and Gestalt grouping to maximize conversion velocity in multi-million dollar funnels.",
     image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80"
   }
 ];
 
 export const COMPARISON_DATA = [
   {
-    metric: "Performance & Core Web Vitals",
-    standardAgency: "Sluggish templates (LCP > 3.8s, CLS > 0.15)",
-    immersiveStudio: "Sub-second LCP (<0.9s), zero CLS, 60/120fps GPU compositing"
+    metric: "Visitor Retention & First Impression",
+    standardAgency: "Generic template, static text blocks, instant bounce (< 15s avg session)",
+    immersiveStudio: "Cinematic interactive world, sensory physics, 3.5+ minute avg session"
   },
   {
-    metric: "Creative Engineering & 3D",
-    standardAgency: "Stock WordPress/Webflow widgets and generic cards",
-    immersiveStudio: "Custom WebGL shaders, Lenis scroll physics, bespoke Bento topologies"
+    metric: "Creative Technology & 3D",
+    standardAgency: "Standard Webflow/WordPress sliders and stock icon packs",
+    immersiveStudio: "Custom WebGL shaders, interactive 3D configurators, Lenis momentum"
   },
   {
-    metric: "Cognitive Behavioral UX",
-    standardAgency: "Disorganized content with high cognitive friction",
-    immersiveStudio: "Hick-Hyman minimization, Fitts's Law magnetic affordance, Zeigarnik funnels"
+    metric: "Audio & Tactile Feedback",
+    standardAgency: "Mute, sterile, lifeless interaction states",
+    immersiveStudio: "Procedural Web Audio synthesis, magnetic cursor pull, spring haptics"
   },
   {
-    metric: "Production Integrity",
-    standardAgency: "Placeholder copy ('Lorem Ipsum') and generic stock models",
-    immersiveStudio: "Authentic editorial copy, curated high-res CDN pipelines, monoline SVG"
+    metric: "Core Web Vitals & Engineering",
+    standardAgency: "Bloated plugin scripts (LCP > 3.5s, CLS > 0.15)",
+    immersiveStudio: "Sub-second LCP (<0.8s), zero CLS, 60/120fps GPU layer isolation"
   }
 ];
