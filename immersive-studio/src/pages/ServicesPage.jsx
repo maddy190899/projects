@@ -6,31 +6,35 @@ import {
   Activity,
   CheckCircle2,
   TrendingUp,
+  Cpu,
+  Sparkles
 } from 'lucide-react';
 import { SERVICES } from '../data/studioData';
 import { ProjectCalculator } from '../components/ProjectCalculator';
+import { ShaderLab } from '../components/ShaderLab';
+import { sound } from '../lib/soundEngine';
 
 export const ServicesPage = ({ setActivePage, onScopeSelected }) => {
   const PROCESS_STEPS = [
     {
       step: '01',
       title: 'Neuro-Perceptual & Behavioral Modeling',
-      desc: 'We map user attention funnels through Gestalt grouping and cognitive load theory, defining clear visual pathways that eliminate friction.',
+      desc: 'We map visitor attention pathways through Gestalt grouping and cognitive load minimization, eliminating wayfinding friction before writing code.',
     },
     {
       step: '02',
       title: 'Kinetic Prototyping & Physics Setup',
-      desc: 'Choreographing custom deceleration curves, Lenis scroll virtualization, and GPU layer isolation before writing production code.',
+      desc: 'Choreographing custom deceleration curves, Lenis scroll virtualization, and GPU layer isolation to guarantee continuous 60/120fps frame budgets.',
     },
     {
       step: '03',
-      title: 'Haute Full-Stack Engineering',
-      desc: 'Developing on React with zero placeholders, handcrafted SVG assets, and custom WebGL shaders for tactile depth.',
+      title: 'Haute WebGL & Full-Stack Craft',
+      desc: 'Developing on React 19 with custom Three.js raycasting shaders, handcrafted SVG assets, and procedural Web Audio design.',
     },
     {
       step: '04',
-      title: 'Vitals SLA & Worldwide Edge Launch',
-      desc: 'Auditing sub-second LCP, zero layout shift (CLS 0.00), WCAG 2.2 AA accessibility, and deploying with global CDN caching.',
+      title: 'Core Web Vitals SLA & Global Launch',
+      desc: 'Auditing sub-second LCP (<0.8s), zero layout shift (CLS 0.00), WCAG 2.2 AA accessibility, and worldwide CDN edge routing.',
     },
   ];
 
@@ -41,8 +45,8 @@ export const ServicesPage = ({ setActivePage, onScopeSelected }) => {
         <span className="text-xs font-mono uppercase tracking-eyebrow text-accent-electric block mb-3">
           [ CAPABILITIES & ARCHITECTURAL DISCIPLINES ]
         </span>
-        <h1 className="type-hero font-display font-bold text-text-primary tracking-tight mb-6">
-          SERVICES & CAPABILITIES
+        <h1 className="type-hero font-display font-extrabold text-text-primary tracking-tight mb-6">
+          SERVICES & LAB
         </h1>
         <p className="text-text-secondary type-body max-w-2xl leading-relaxed font-light">
           We combine the visual audacity of high-fashion art direction with the algorithmic precision of systems engineering.
@@ -96,6 +100,22 @@ export const ServicesPage = ({ setActivePage, onScopeSelected }) => {
           </div>
         ))}
       </div>
+
+      {/* Embedded Live Shader R&D Playground */}
+      <section>
+        <div className="mb-8">
+          <span className="text-xs font-mono uppercase tracking-eyebrow text-accent-electric block mb-2">
+            [ INTERNAL R&D LAB ]
+          </span>
+          <h2 className="type-h2 font-display font-bold text-text-primary">
+            Interactive Computational Sandbox
+          </h2>
+          <p className="text-text-secondary text-sm font-light mt-2 max-w-xl">
+            Test the procedural particle and fluid physics algorithms that power our client production builds.
+          </p>
+        </div>
+        <ShaderLab />
+      </section>
 
       {/* Interactive Scope Calculator Section */}
       <section className="pt-6">
