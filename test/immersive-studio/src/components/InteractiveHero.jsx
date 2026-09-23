@@ -1,248 +1,242 @@
-import { useRef, useEffect, useState } from 'react';
-import { motion } from 'motion/react';
-import { ArrowDownRight, Play, Pause, Volume2, VolumeX, Sparkles, Compass } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Heart, Coffee, Sparkles, Smile, ArrowDown, Send, MessageCircle } from 'lucide-react';
 
-export default function InteractiveHero({ onOpenInquiry, setCursorText }) {
-  const canvasRef = useRef(null);
-  const [isPlayingReel, setIsPlayingReel] = useState(true);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+export default function InteractiveHero({ onOpenChat }) {
+  const [stickers, setStickers] = useState([
+    { id: 1, text: "Your work made me smile! — Sarah, London", color: "bg-amber-100 border-amber-300 text-stone-800", x: 20, y: 15, rotate: -3 },
+    { id: 2, text: "Can't wait to work together on our project — Leo", color: "bg-rose-100 border-rose-300 text-stone-800", x: 65, y: 35, rotate: 2 },
+    { id: 3, text: "Warm greetings from Seattle! ☕", color: "bg-emerald-100 border-emerald-300 text-stone-800", x: 30, y: 70, rotate: -1 },
+  ]);
 
-  // Interactive Liquid Mesh Canvas
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let animId;
-    let width = (canvas.width = canvas.offsetWidth);
-    let height = (canvas.height = canvas.offsetHeight);
+  const [newNote, setNewNote] = useState('');
+  const [showNoteInput, setShowNoteInput] = useState(false);
 
-    const handleResize = () => {
-      if (!canvas) return;
-      width = canvas.width = canvas.offsetWidth;
-      height = canvas.height = canvas.offsetHeight;
-    };
-    window.addEventListener('resize', handleResize);
+  const addSticker = (e) => {
+    e.preventDefault();
+    if (!newNote.trim()) return;
 
-    let time = 0;
-    let targetX = width / 2;
-    let targetY = height / 2;
-    let currentX = width / 2;
-    let currentY = height / 2;
+    const colors = [
+      "bg-amber-100 border-amber-300 text-stone-800",
+      "bg-sky-100 border-sky-300 text-stone-800",
+      "bg-purple-100 border-purple-300 text-stone-800",
+      "bg-emerald-100 border-emerald-300 text-stone-800"
+    ];
 
-    const onPointerMove = (e) => {
-      const rect = canvas.getBoundingClientRect();
-      targetX = e.clientX - rect.left;
-      targetY = e.clientY - rect.top;
-    };
-    window.addEventListener('mousemove', onPointerMove);
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    const randomRotate = (Math.random() * 6) - 3;
+    const randomX = Math.floor(Math.random() * 60) + 15;
+    const randomY = Math.floor(Math.random() * 60) + 15;
 
-    const draw = () => {
-      time += 0.015;
-      currentX += (targetX - currentX) * 0.05;
-      currentY += (targetY - currentY) * 0.05;
-
-      ctx.clearRect(0, 0, width, height);
-
-      // Draw subtle architectural distortion grid
-      const cols = 28;
-      const rows = 14;
-      const cellW = width / cols;
-      const cellH = height / rows;
-
-      ctx.strokeStyle = 'rgba(244, 243, 239, 0.07)';
-      ctx.lineWidth = 1;
-
-      for (let i = 0; i <= cols; i++) {
-        ctx.beginPath();
-        for (let j = 0; j <= rows; j++) {
-          const x = i * cellW;
-          const y = j * cellH;
-          const dx = x - currentX;
-          const dy = y - currentY;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const maxDist = 320;
-
-          let offsetX = 0;
-          let offsetY = 0;
-
-          if (dist < maxDist) {
-            const force = (1 - dist / maxDist) * 35;
-            const angle = Math.atan2(dy, dx);
-            offsetX = Math.cos(angle) * force;
-            offsetY = Math.sin(angle) * force;
-          }
-
-          const wave = Math.sin(time + i * 0.2 + j * 0.2) * 6;
-          const px = x + offsetX;
-          const py = y + offsetY + wave;
-
-          if (j === 0) ctx.moveTo(px, py);
-          else ctx.lineTo(px, py);
-        }
-        ctx.stroke();
+    setStickers(prev => [
+      ...prev,
+      {
+        id: Date.now(),
+        text: newNote,
+        color: randomColor,
+        x: randomX,
+        y: randomY,
+        rotate: randomRotate
       }
-
-      // Draw interactive floating particle node
-      ctx.beginPath();
-      ctx.arc(currentX, currentY, 180, 0, Math.PI * 2);
-      const gradient = ctx.createRadialGradient(currentX, currentY, 0, currentX, currentY, 180);
-      gradient.addColorStop(0, 'rgba(255, 255, 255, 0.08)');
-      gradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.02)');
-      gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-      ctx.fillStyle = gradient;
-      ctx.fill();
-
-      animId = requestAnimationFrame(draw);
-    };
-
-    draw();
-
-    return () => {
-      cancelAnimationFrame(animId);
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('mousemove', onPointerMove);
-    };
-  }, []);
+    ]);
+    setNewNote('');
+    setShowNoteInput(false);
+  };
 
   return (
-    <section className="relative min-h-[92vh] flex flex-col justify-between pt-36 pb-12 px-6 sm:px-10 max-w-[1600px] mx-auto overflow-hidden">
+    <section className="relative pt-36 pb-20 md:pt-44 md:pb-28 px-6 max-w-6xl mx-auto">
       
-      {/* Interactive Liquid Canvas in Background */}
-      <canvas 
-        ref={canvasRef} 
-        className="absolute inset-0 w-full h-full pointer-events-none opacity-80 z-0"
-      />
-
-      {/* Top Editorial Metadata Bar */}
-      <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-chalk pb-6">
-        <div className="flex items-center gap-3">
-          <span className="font-mono-tag text-xs text-zinc-400">VOL. 26 / ISSUE IV</span>
-          <span className="text-zinc-600">•</span>
-          <span className="font-mono-tag text-xs text-emerald-400 flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping inline-block" />
-            2 SLOTS AVAILABLE FOR Q4 2026
-          </span>
-        </div>
-
-        <div className="flex items-center gap-6 text-xs font-mono-tag text-zinc-500">
-          <span>AWWWARDS STUDIO OF THE MONTH</span>
-          <span className="hidden md:inline">•</span>
-          <span className="hidden md:inline">34× FWA OF THE DAY</span>
-        </div>
-      </div>
-
-      {/* Hero Typography Centerpiece */}
-      <div className="relative z-10 my-auto py-12 md:py-16">
-        <div className="max-w-6xl">
-          
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <span className="font-mono-tag text-xs uppercase tracking-widest text-zinc-400 mb-6 block">
-              [ INDEPENDENT DIGITAL PRODUCTION PRACTICE ]
-            </span>
-          </motion.div>
-
-          <motion.h1 
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-5xl sm:text-7xl lg:text-[108px] font-display font-bold leading-[0.92] tracking-tighter text-[#f4f3ef]"
-          >
-            WE CRAFT <br />
-            <span className="font-serif-editorial font-normal tracking-tight text-white pr-4">provocative</span>
-            DIGITAL REALITIES.
-          </motion.h1>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-10 sm:mt-12 flex flex-col md:flex-row md:items-end justify-between gap-8 pt-8 border-t border-chalk"
-          >
-            <p className="max-w-xl text-zinc-400 text-base sm:text-lg font-light leading-relaxed">
-              We reject homogeneous website templates. We architect bespoke 3D WebGL worlds, progressive React 19 platforms, and sensory brand flagships that command cultural relevance and measurable growth.
-            </p>
-
-            <div className="flex items-center gap-4">
-              <button
-                onClick={onOpenInquiry}
-                onMouseEnter={() => setCursorText?.("INQUIRE")}
-                onMouseLeave={() => setCursorText?.("")}
-                className="px-8 py-4 bg-white text-black font-mono-tag text-xs font-bold uppercase tracking-widest hover:bg-zinc-200 transition-colors flex items-center gap-3 cursor-pointer"
-              >
-                <span>INITIATE COMMISSION</span>
-                <ArrowDownRight className="w-4 h-4" />
-              </button>
-
-              <a
-                href="#work"
-                onMouseEnter={() => setCursorText?.("SCROLL")}
-                onMouseLeave={() => setCursorText?.("")}
-                className="px-6 py-4 border border-chalk hover:border-white font-mono-tag text-xs text-zinc-300 hover:text-white transition-colors cursor-pointer"
-              >
-                INDEX (08)
-              </a>
-            </div>
-          </motion.div>
-
-        </div>
-      </div>
-
-      {/* Interactive Studio Reel Showcase Strip */}
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center pt-8 border-t border-chalk">
+      {/* Friendly Human Welcome Tag */}
+      <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
         
-        {/* Left Column: Authentic Full Reel Video Preview */}
-        <div className="lg:col-span-8 group relative aspect-[21/9] rounded-none overflow-hidden border border-chalk bg-zinc-950">
-          <img
-            src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1600&q=85"
-            alt="Immersive Studio Creative Reel 2026"
-            className="w-full h-full object-cover img-editorial-zoom opacity-90 group-hover:opacity-100"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-100 border border-stone-200 text-xs font-medium text-stone-700 mb-6"
+        >
+          <span className="text-amber-600">☕</span>
+          <span>A friendly, human-first digital design & code studio</span>
+          <span className="font-handwriting text-stone-500 text-sm">(est. 2019)</span>
+        </motion.div>
 
-          {/* Reel Overlay Info */}
-          <div className="absolute bottom-4 left-6 right-6 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => setIsPlayingReel(!isPlayingReel)}
-                className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center cursor-pointer hover:scale-105 transition-transform"
-              >
-                {isPlayingReel ? <Pause className="w-3.5 h-3.5 fill-black" /> : <Play className="w-3.5 h-3.5 fill-black ml-0.5" />}
-              </button>
-              <div className="text-xs font-mono-tag">
-                <span className="text-white font-bold">2026 STUDIO SHOWREEL</span>
-                <span className="text-zinc-400 block text-[10px]">SPATIAL WEB & CREATIVE ENGINEERING</span>
-              </div>
-            </div>
+        {/* Heartfelt Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="text-4xl sm:text-6xl md:text-7xl font-human font-bold text-stone-900 leading-[1.1] tracking-tight mb-6"
+        >
+          We build websites with <br />
+          <span className="italic font-normal text-[#E05A47] font-human">warmth, care & craft</span> <br />
+          for people doing good work.
+        </motion.h1>
 
-            <span className="text-[11px] font-mono-tag text-zinc-400">
-              01:42 / 03:00
-            </span>
+        {/* Honest, Grounded Subtitle */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.15 }}
+          className="text-lg sm:text-xl text-stone-600 font-normal leading-relaxed max-w-2xl mb-10"
+        >
+          We're a small, tight-knit group of five makers who love the web. We don't do cold corporate templates or generic AI assembly lines. Every layout, illustration, and transition is crafted by real hands that genuinely care about your story.
+        </motion.p>
+
+        {/* Action Triggers with Friendly Rationale */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="flex flex-col sm:flex-row items-center gap-4 mb-4"
+        >
+          <button
+            onClick={onOpenChat}
+            className="btn-warm-primary px-8 py-4 rounded-full font-semibold text-sm flex items-center justify-center gap-2.5 cursor-pointer shadow-md"
+          >
+            <Coffee className="w-4 h-4" />
+            <span>Tell Us What You're Building</span>
+          </button>
+
+          <a
+            href="#work"
+            className="px-8 py-4 rounded-full font-semibold text-sm text-stone-700 bg-white border border-stone-200 hover:bg-stone-50 hover:border-stone-300 transition-colors flex items-center gap-2 cursor-pointer shadow-xs"
+          >
+            <span>See Our Real Work</span>
+            <ArrowDown className="w-4 h-4 text-stone-400" />
+          </a>
+        </motion.div>
+
+        {/* Hand-drawn reassurance */}
+        <p className="font-handwriting text-stone-500 text-base mt-2 flex items-center gap-1.5">
+          <span>✓</span>
+          <span>Yes, real humans answer your email within a few hours.</span>
+        </p>
+
+      </div>
+
+      {/* Tactile Polaroid Story Collage (Real Photos, Real Humans) */}
+      <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 items-center max-w-5xl mx-auto">
+        
+        {/* Polaroid 1: Team Sketching & Coffee */}
+        <motion.div
+          whileHover={{ y: -8, rotate: -2 }}
+          className="polaroid-frame relative rotate-[-2deg]"
+        >
+          <div className="washi-tape" />
+          <div className="aspect-[4/3] overflow-hidden bg-stone-100 rounded-xs mb-3">
+            <img
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+              alt="Immersive Studio team sketching on paper over morning coffee"
+              className="w-full h-full object-cover"
+            />
           </div>
+          <p className="font-handwriting text-stone-700 text-lg leading-snug text-center">
+            Morning coffee & pencil sketches for Bloom Bakery ☕
+          </p>
+          <span className="block text-[11px] text-stone-400 text-center font-mono">Friday 10:15 AM</span>
+        </motion.div>
+
+        {/* Polaroid 2: Working on Code in the Sun */}
+        <motion.div
+          whileHover={{ y: -8, rotate: 1 }}
+          className="polaroid-frame relative rotate-[2deg] md:-translate-y-4"
+        >
+          <div className="washi-tape" />
+          <div className="aspect-[4/3] overflow-hidden bg-stone-100 rounded-xs mb-3">
+            <img
+              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80"
+              alt="Crafting clean, responsive code in a warm sunny studio"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <p className="font-handwriting text-stone-700 text-lg leading-snug text-center">
+            Sweating the micro-details so it feels effortless ☼
+          </p>
+          <span className="block text-[11px] text-stone-400 text-center font-mono">React 19 & Smooth CSS</span>
+        </motion.div>
+
+        {/* Polaroid 3: Barnaby the Studio Dog */}
+        <motion.div
+          whileHover={{ y: -8, rotate: -1 }}
+          className="polaroid-frame relative rotate-[-1deg]"
+        >
+          <div className="washi-tape" />
+          <div className="aspect-[4/3] overflow-hidden bg-stone-100 rounded-xs mb-3">
+            <img
+              src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=800&q=80"
+              alt="Barnaby the golden retriever resting in the studio"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <p className="font-handwriting text-stone-700 text-lg leading-snug text-center">
+            Barnaby reminding us to take afternoon park walks 🐾
+          </p>
+          <span className="block text-[11px] text-stone-400 text-center font-mono">Chief Morale Officer</span>
+        </motion.div>
+
+      </div>
+
+      {/* Interactive Digital Corkboard: "Leave a Friendly Note" */}
+      <div className="mt-16 p-6 sm:p-8 rounded-2xl bg-amber-50/60 border border-amber-200/70 relative">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div className="flex items-center gap-2">
+            <span className="text-xl">📌</span>
+            <div>
+              <h3 className="font-human font-bold text-stone-900 text-base">
+                The Studio Corkboard
+              </h3>
+              <p className="font-handwriting text-stone-500 text-base">
+                Little notes left by friends, visitors, and past collaborators.
+              </p>
+            </div>
+          </div>
+
+          <button
+            onClick={() => setShowNoteInput(!showNoteInput)}
+            className="px-4 py-2 rounded-full bg-white border border-amber-200 text-stone-800 text-xs font-semibold hover:bg-amber-100 transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs self-start sm:self-auto"
+          >
+            <MessageCircle className="w-3.5 h-3.5 text-amber-700" />
+            <span>Pin a Note on the Board</span>
+          </button>
         </div>
 
-        {/* Right Column: Editorial Metric Statements */}
-        <div className="lg:col-span-4 flex flex-col justify-between h-full space-y-4">
-          <div className="p-5 border border-chalk flex flex-col justify-between">
-            <span className="text-xs font-mono-tag text-zinc-500 uppercase">Core Standard</span>
-            <p className="text-2xl font-display font-bold text-white mt-2">Zero Pre-Made Frameworks.</p>
-            <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
-              Every shader, camera trajectory, and interaction is engineered to the exact brand DNA.
-            </p>
-          </div>
+        {/* Input form if open */}
+        {showNoteInput && (
+          <form onSubmit={addSticker} className="mb-6 flex gap-2">
+            <input
+              type="text"
+              required
+              maxLength={80}
+              value={newNote}
+              onChange={(e) => setNewNote(e.target.value)}
+              placeholder="Say hello, share your city, or leave a friendly word..."
+              className="px-4 py-2.5 rounded-xl bg-white border border-amber-300 text-stone-800 text-sm flex-1 focus:outline-none focus:border-stone-800 font-handwriting text-lg"
+            />
+            <button
+              type="submit"
+              className="px-5 py-2.5 rounded-xl bg-stone-900 text-white font-medium text-xs hover:bg-stone-800 transition-colors cursor-pointer"
+            >
+              Pin it! 📌
+            </button>
+          </form>
+        )}
 
-          <div className="p-5 border border-chalk flex flex-col justify-between">
-            <span className="text-xs font-mono-tag text-zinc-500 uppercase">Speed & Uptime</span>
-            <div className="flex items-baseline gap-2 mt-2">
-              <span className="text-3xl font-display font-bold text-white">0.24s</span>
-              <span className="text-xs font-mono-tag text-emerald-400">AVERAGE GLOBAL FCP</span>
-            </div>
-          </div>
+        {/* Pinned Sticky Notes Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {stickers.map((note) => (
+            <motion.div
+              key={note.id}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className={`p-4 rounded-xl border shadow-xs ${note.color} transition-transform hover:scale-102`}
+              style={{ transform: `rotate(${note.rotate}deg)` }}
+            >
+              <div className="w-2 h-2 rounded-full bg-stone-400 mx-auto -mt-2 mb-2" />
+              <p className="font-handwriting text-stone-800 text-lg leading-snug">
+                "{note.text}"
+              </p>
+            </motion.div>
+          ))}
         </div>
-
       </div>
 
     </section>
