@@ -1,28 +1,26 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Volume2, VolumeX, Menu, X, ArrowUpRight } from 'lucide-react';
+import { Coffee, Music, Volume2, VolumeX, Menu, X, Heart, Sparkles } from 'lucide-react';
 
-export default function Navbar({ onOpenInquiry, setCursorText }) {
+export default function Navbar({ onOpenChat }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [soundOn, setSoundOn] = useState(false);
-  const [studioTime, setStudioTime] = useState('');
+  const [playingMusic, setPlayingMusic] = useState(false);
 
-  // Subtle analogue tactile click using Web Audio API
-  const playClick = (freq = 320) => {
-    if (!soundOn) return;
+  // Play gentle, warm acoustic chime with Web Audio API
+  const playGentleChime = (freq = 432) => {
     try {
       const ctx = new (window.AudioContext || window.webkitAudioContext)();
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
-      osc.type = 'triangle';
+      osc.type = 'sine';
       osc.frequency.setValueAtTime(freq, ctx.currentTime);
-      gain.gain.setValueAtTime(0.03, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.05);
+      gain.gain.setValueAtTime(0.04, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.5);
       osc.connect(gain);
       gain.connect(ctx.destination);
       osc.start();
-      osc.stop(ctx.currentTime + 0.05);
+      osc.stop(ctx.currentTime + 0.5);
     } catch {
       // Audio fallback
     }
@@ -30,120 +28,101 @@ export default function Navbar({ onOpenInquiry, setCursorText }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
-
-    const updateClock = () => {
-      const now = new Date();
-      const paris = now.toLocaleTimeString('en-GB', { timeZone: 'Europe/Paris', hour: '2-digit', minute: '2-digit' });
-      setStudioTime(`PAR ${paris}`);
-    };
-    updateClock();
-    const timer = setInterval(updateClock, 1000);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      clearInterval(timer);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems = [
-    { num: "01", label: "SELECTED WORK", href: "#work" },
-    { num: "02", label: "INTERACTIVE LAB", href: "#lab" },
-    { num: "03", label: "DISCIPLINE", href: "#disciplines" },
-    { num: "04", label: "RECOGNITION", href: "#recognition" },
-    { num: "05", label: "MANIFESTO", href: "#manifesto" }
+  const navLinks = [
+    { label: "Our Work", href: "#work" },
+    { label: "Meet Us", href: "#humans" },
+    { label: "How We Work", href: "#how-it-feels" },
+    { label: "Studio Scrapbook", href: "#scrapbook" },
+    { label: "Kind Words", href: "#kind-words" }
   ];
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+    <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
       scrolled 
-        ? "bg-[#09090b]/90 backdrop-blur-md border-b border-chalk py-3.5" 
-        : "bg-transparent py-6"
+        ? "bg-[#FAF7F2]/90 backdrop-blur-md border-b border-stone-200/80 shadow-xs py-3.5" 
+        : "bg-transparent py-5"
     }`}>
-      <div className="max-w-[1600px] mx-auto px-6 sm:px-10 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         
-        {/* Brand Lockup */}
+        {/* Warm Studio Brand Identity */}
         <a 
           href="#"
-          onClick={() => playClick(440)}
-          onMouseEnter={() => setCursorText?.("HOME")}
-          onMouseLeave={() => setCursorText?.("")}
+          onClick={() => playGentleChime(528)}
           className="flex items-center gap-3 group cursor-pointer"
         >
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <div className="w-9 h-9 rounded-full bg-amber-100 border border-amber-200 flex items-center justify-center text-amber-800 group-hover:scale-105 group-hover:bg-amber-200 transition-all shadow-xs">
+            <span className="text-base">☼</span>
+          </div>
           <div className="flex flex-col">
-            <span className="font-display font-bold text-sm tracking-widest text-[#f4f3ef] uppercase group-hover:text-white transition-colors">
-              IMMERSIVE <span className="font-serif-editorial lowercase text-xs tracking-normal font-normal text-zinc-400">studio</span>
+            <span className="font-human font-bold text-lg text-stone-900 leading-tight flex items-center gap-1.5">
+              Immersive Studio
             </span>
-            <span className="font-mono-tag text-[9px] text-zinc-500 uppercase tracking-widest">
-              PARIS • TOKYO • SF
+            <span className="font-handwriting text-stone-500 text-sm -mt-0.5">
+              crafted with heart & clean code
             </span>
           </div>
         </a>
 
-        {/* Editorial Nav Index */}
-        <nav className="hidden lg:flex items-center gap-8">
-          {navItems.map((item) => (
+        {/* Studio Status Pill (Desktop) */}
+        <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/60 text-emerald-800 text-xs font-medium">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span>In the studio today • Coffee hot, drafting new ideas</span>
+        </div>
+
+        {/* Navigation Links */}
+        <nav className="hidden md:flex items-center gap-6">
+          {navLinks.map((link) => (
             <a
-              key={item.label}
-              href={item.href}
-              onClick={() => playClick(480)}
-              onMouseEnter={() => setCursorText?.(item.num)}
-              onMouseLeave={() => setCursorText?.("")}
-              className="group flex items-center gap-1.5 text-xs font-mono-tag text-zinc-400 hover:text-white transition-colors cursor-pointer"
+              key={link.label}
+              href={link.href}
+              onClick={() => playGentleChime(440)}
+              className="text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors hover:underline underline-offset-4 decoration-amber-300 decoration-2"
             >
-              <span className="text-[10px] text-zinc-600 group-hover:text-zinc-400 transition-colors">
-                {item.num}
-              </span>
-              <span>{item.label}</span>
+              {link.label}
             </a>
           ))}
         </nav>
 
-        {/* Controls & Action */}
-        <div className="hidden sm:flex items-center gap-6">
+        {/* Warm CTA Button & Ambient Audio */}
+        <div className="hidden sm:flex items-center gap-4">
           
-          {/* Sound Toggle */}
           <button
             onClick={() => {
-              const next = !soundOn;
-              setSoundOn(next);
-              if (next) playClick(520);
+              playGentleChime(playingMusic ? 300 : 600);
+              setPlayingMusic(!playingMusic);
             }}
-            onMouseEnter={() => setCursorText?.("AUDIO")}
-            onMouseLeave={() => setCursorText?.("")}
-            className="flex items-center gap-2 text-[11px] font-mono-tag text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer"
+            title={playingMusic ? "Mute warm studio chime" : "Play warm studio chime"}
+            className="p-2 rounded-full text-stone-500 hover:text-stone-800 hover:bg-stone-100 transition-colors cursor-pointer"
           >
-            {soundOn ? <Volume2 className="w-3.5 h-3.5 text-white" /> : <VolumeX className="w-3.5 h-3.5 text-zinc-500" />}
-            <span>SOUND: {soundOn ? "ON" : "OFF"}</span>
+            {playingMusic ? <Volume2 className="w-4 h-4 text-amber-700" /> : <VolumeX className="w-4 h-4" />}
           </button>
 
-          {/* Timezone Indicator */}
-          <span className="font-mono-tag text-[11px] text-zinc-500 border-l border-chalk pl-4">
-            {studioTime || "PAR 12:00"}
-          </span>
-
-          {/* Commission Button */}
           <button
             onClick={() => {
-              playClick(600);
-              onOpenInquiry();
+              playGentleChime(587);
+              onOpenChat();
             }}
-            onMouseEnter={() => setCursorText?.("START")}
-            onMouseLeave={() => setCursorText?.("")}
-            className="px-4 py-2 border border-chalk hover:border-white text-xs font-mono-tag uppercase tracking-wider text-[#f4f3ef] hover:bg-white hover:text-black transition-all duration-300 flex items-center gap-1.5 cursor-pointer"
+            className="btn-warm-primary px-5 py-2.5 rounded-full text-xs font-semibold flex items-center gap-2 cursor-pointer shadow-sm"
           >
-            <span>COMMISSION</span>
-            <ArrowUpRight className="w-3 h-3" />
+            <Coffee className="w-3.5 h-3.5" />
+            <span>Let's Have a Coffee ☕</span>
           </button>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Hamburger */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-2 text-zinc-300 hover:text-white cursor-pointer"
+          className="md:hidden p-2 text-stone-700 hover:text-stone-900 cursor-pointer"
+          aria-label="Toggle menu"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -157,43 +136,35 @@ export default function Navbar({ onOpenInquiry, setCursorText }) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-[#09090b] border-b border-chalk px-6 py-8"
+            className="md:hidden bg-[#FAF7F2] border-b border-stone-200 px-6 py-6"
           >
-            <div className="flex flex-col gap-6">
-              {navItems.map((item) => (
+            <div className="flex flex-col gap-4">
+              {navLinks.map((link) => (
                 <a
-                  key={item.label}
-                  href={item.href}
+                  key={link.label}
+                  href={link.href}
                   onClick={() => {
-                    playClick(440);
+                    playGentleChime(440);
                     setMobileMenuOpen(false);
                   }}
-                  className="flex items-center justify-between text-lg font-display text-zinc-200 hover:text-white border-b border-chalk pb-3"
+                  className="text-base font-medium text-stone-800 hover:text-amber-800 py-2 border-b border-stone-100"
                 >
-                  <span>{item.label}</span>
-                  <span className="font-mono-tag text-xs text-zinc-500">{item.num}</span>
+                  {link.label}
                 </a>
               ))}
 
-              <div className="flex items-center justify-between pt-2">
+              <div className="pt-2">
                 <button
-                  onClick={() => setSoundOn(!soundOn)}
-                  className="font-mono-tag text-xs text-zinc-400"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenChat();
+                  }}
+                  className="w-full py-3 rounded-full bg-stone-900 text-amber-50 font-semibold text-center flex items-center justify-center gap-2"
                 >
-                  AUDIO: {soundOn ? "ENABLED" : "MUTED"}
+                  <Coffee className="w-4 h-4" />
+                  <span>Let's Have a Coffee ☕</span>
                 </button>
-                <span className="font-mono-tag text-xs text-zinc-500">{studioTime}</span>
               </div>
-
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenInquiry();
-                }}
-                className="w-full py-3.5 bg-white text-black font-mono-tag text-xs uppercase tracking-widest font-bold text-center mt-2"
-              >
-                INITIATE COMMISSION
-              </button>
             </div>
           </motion.div>
         )}
