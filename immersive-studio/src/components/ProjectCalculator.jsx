@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
-import { Calculator, Check, ArrowRight, ShieldCheck, Clock, Zap, Cpu, Sparkles } from 'lucide-react';
+import { Calculator, Check, ArrowRight, ShieldCheck, Clock, Zap, Cpu } from 'lucide-react';
 import { MagneticButton } from './MagneticButton';
 import { sound } from '../utils/soundEngine';
 
@@ -47,7 +46,7 @@ export const ProjectCalculator = ({ onTransferScope }) => {
     const estMax = Math.round(totalEstimate * 1.15);
 
     return {
-      sprints: Math.max(4, Math.round(rawSprints * 0.75)), // Concurrent sprint overlap
+      sprints: Math.max(4, Math.round(rawSprints * 0.75)),
       estMin,
       estMax,
       deliverableCount: activeItems.length,
