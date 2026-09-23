@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { capabilitiesData } from '../data/projectsData';
 import { BentoCard } from './BentoCard';
-import { Cpu, Terminal, Zap, ShieldCheck, ArrowRight, Check } from 'lucide-react';
+import { Zap } from 'lucide-react';
 import { sound } from '../utils/soundEngine';
 
-export const CapabilityMatrix = ({ onSelectCapability }) => {
+export const CapabilityMatrix = () => {
   const [activeCapability, setActiveCapability] = useState(0);
 
   return (
