@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Volume2, VolumeX } from 'lucide-react';
 import { MagneticButton } from './MagneticButton';
+import { sound } from '../lib/soundEngine';
 import { cn } from '../lib/utils';
 
 export const NAV_LINKS = [
   { id: 'home', label: 'Index' },
-  { id: 'work', label: 'Work', badge: '04' },
-  { id: 'services', label: 'Services' },
-  { id: 'philosophy', label: 'Philosophy' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'work', label: 'Work', badge: '05' },
+  { id: 'services', label: 'Services & Lab' },
+  { id: 'philosophy', label: 'Manifesto' },
+  { id: 'contact', label: 'Initiate' },
 ];
 
 export const Navbar = ({ activePage, setActivePage }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [audioEnabled, setAudioEnabled] = useState(false);
 
   const handleNavClick = (pageId) => {
+    sound.playClick();
     setActivePage(pageId);
     setMobileMenuOpen(false);
     if (window.__lenis) {
@@ -23,6 +26,11 @@ export const Navbar = ({ activePage, setActivePage }) => {
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+  };
+
+  const handleToggleSound = () => {
+    const newState = sound.toggle();
+    setAudioEnabled(newState);
   };
 
   return (
@@ -60,6 +68,7 @@ export const Navbar = ({ activePage, setActivePage }) => {
               <button
                 key={link.id}
                 onClick={() => handleNavClick(link.id)}
+                onMouseEnter={() => sound.playHover()}
                 className={cn(
                   'relative px-4 py-2 text-xs font-mono tracking-wider uppercase transition-colors rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-ink',
                   isActive ? 'text-white font-medium' : 'text-text-secondary hover:text-text-primary'
@@ -90,15 +99,22 @@ export const Navbar = ({ activePage, setActivePage }) => {
           })}
         </nav>
 
-        {/* Right CTA & Availability Status */}
-        <div className="hidden lg:flex items-center gap-5">
-          <div className="flex items-center gap-2 text-[11px] font-mono text-text-muted px-3 py-1 rounded-full bg-black/[0.03] border border-black/[0.06]">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600" />
-            </span>
-            <span className="text-text-secondary">Q4 INQUIRIES OPEN</span>
-          </div>
+        {/* Right CTA, Sound Toggle & Status */}
+        <div className="hidden lg:flex items-center gap-4">
+          {/* Interactive Sound Design Toggle */}
+          <button
+            onClick={handleToggleSound}
+            aria-label="Toggle Spatial Audio"
+            className={cn(
+              'flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-mono border transition-all shadow-luxury-sm',
+              audioEnabled
+                ? 'bg-accent-electric text-white border-accent-electric'
+                : 'bg-white text-text-muted border-black/[0.08] hover:text-text-primary'
+            )}
+          >
+            {audioEnabled ? <Volume2 className="w-3.5 h-3.5 animate-pulse" /> : <VolumeX className="w-3.5 h-3.5" />}
+            <span>AUDIO: {audioEnabled ? 'ON' : 'OFF'}</span>
+          </button>
 
           <MagneticButton
             variant="primary"
@@ -136,10 +152,13 @@ export const Navbar = ({ activePage, setActivePage }) => {
               <span className="text-xs font-mono uppercase tracking-widest text-text-muted">
                 Directory
               </span>
-              <span className="text-[11px] font-mono text-emerald-700 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
-                Available for Q4
-              </span>
+              <button
+                onClick={handleToggleSound}
+                className="text-xs font-mono text-accent-electric flex items-center gap-1.5"
+              >
+                {audioEnabled ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
+                <span>AUDIO: {audioEnabled ? 'ON' : 'OFF'}</span>
+              </button>
             </div>
 
             <nav className="flex flex-col gap-2">
