@@ -16,7 +16,7 @@ export function App() {
   const [selectedCaseStudy, setSelectedCaseStudy] = useState(null);
   const [prefilledScope, setPrefilledScope] = useState(null);
 
-  // Sync with browser URL hash or history for natural wayfinding
+  // Sync with browser URL hash for deep linking
   useEffect(() => {
     const handleHash = () => {
       const hash = window.location.hash.replace('#', '');
@@ -33,7 +33,11 @@ export function App() {
   const handlePageChange = (pageId) => {
     setActivePage(pageId);
     window.location.hash = pageId;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.__lenis) {
+      window.__lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   const handleStartProjectWithScope = (scopeData) => {
@@ -46,10 +50,10 @@ export function App() {
       {/* Interactive custom cursor follower */}
       <CustomCursor />
 
-      {/* Atmospheric tactile noise overlay */}
+      {/* Atmospheric tactile paper grain overlay */}
       <div className="fixed inset-0 pointer-events-none z-30 tactile-noise" aria-hidden="true" />
 
-      {/* Global High-Craft Navbar */}
+      {/* Global Gallery Navbar */}
       <Navbar activePage={activePage} setActivePage={handlePageChange} />
 
       {/* Semantic Main Content with Smooth Page Transitions */}
@@ -61,7 +65,7 @@ export function App() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
               <HomePage
                 setActivePage={handlePageChange}
@@ -76,7 +80,7 @@ export function App() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
               <WorkPage
                 setActivePage={handlePageChange}
@@ -91,7 +95,7 @@ export function App() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
               <ServicesPage
                 setActivePage={handlePageChange}
@@ -106,7 +110,7 @@ export function App() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
               <PhilosophyPage setActivePage={handlePageChange} />
             </motion.div>
@@ -118,7 +122,7 @@ export function App() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
               <ContactPage prefilledScope={prefilledScope} />
             </motion.div>
@@ -126,12 +130,16 @@ export function App() {
         </AnimatePresence>
       </main>
 
-      {/* Case Study Deep Dive Modal */}
-      <CaseStudyModal
-        caseStudy={selectedCaseStudy}
-        onClose={() => setSelectedCaseStudy(null)}
-        onStartProject={() => handlePageChange('contact')}
-      />
+      {/* Case Study Deep Dive Modal - only rendered when open to prevent scroll lock leaks */}
+      <AnimatePresence>
+        {selectedCaseStudy && (
+          <CaseStudyModal
+            caseStudy={selectedCaseStudy}
+            onClose={() => setSelectedCaseStudy(null)}
+            onStartProject={() => handlePageChange('contact')}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Haute Global Footer */}
       <Footer setActivePage={handlePageChange} />
