@@ -1,6 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Award, Star, Quote, CheckCircle2 } from 'lucide-react';
+import { Award, Quote, CheckCircle2 } from 'lucide-react';
 import { studioStats } from '../data/projectsData';
 
 const TESTIMONIALS = [
