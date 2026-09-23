@@ -4,12 +4,7 @@ import confetti from 'canvas-confetti';
 import {
   ArrowRight,
   CheckCircle2,
-  Mail,
-  MapPin,
   Clock,
-  Sparkles,
-  ShieldCheck,
-  Send,
   RotateCcw
 } from 'lucide-react';
 import { MagneticButton } from '../components/MagneticButton';
@@ -48,7 +43,6 @@ export const ContactPage = ({ prefilledScope }) => {
     if (currentStep < 4) {
       setCurrentStep((prev) => prev + 1);
     } else {
-      // Step 4 Terminal Submit with Peak-End Rule celebration
       triggerPeakEndCelebration();
       setIsSubmitted(true);
     }
@@ -57,13 +51,13 @@ export const ContactPage = ({ prefilledScope }) => {
   const triggerPeakEndCelebration = () => {
     try {
       confetti({
-        particleCount: 100,
-        spread: 70,
+        particleCount: 110,
+        spread: 80,
         origin: { y: 0.6 },
-        colors: ['#D2FF00', '#FFFFFF', '#00F2FE'],
+        colors: ['#0055FF', '#111114', '#FAF9F6', '#D97706'],
       });
     } catch (e) {
-      // Fallback if canvas-confetti context is constrained
+      // safe fallback
     }
   };
 
@@ -76,13 +70,13 @@ export const ContactPage = ({ prefilledScope }) => {
     <div className="space-y-24 pt-28 sm:pt-36 px-6 md:px-12 max-w-7xl mx-auto pb-20">
       {/* Header */}
       <div className="max-w-4xl">
-        <span className="text-xs font-mono uppercase tracking-eyebrow text-accent-volt block mb-3">
+        <span className="text-xs font-mono uppercase tracking-eyebrow text-accent-electric block mb-3">
           [ INITIATE COLLABORATION ]
         </span>
         <h1 className="type-hero font-display font-bold text-text-primary tracking-tight mb-6">
           START A PROJECT
         </h1>
-        <p className="text-text-secondary type-body max-w-2xl leading-relaxed">
+        <p className="text-text-secondary type-body max-w-2xl leading-relaxed font-light">
           Submit your project parameters through our structured briefing wizard. All submissions receive executive partner review within 4 business hours.
         </p>
       </div>
@@ -90,7 +84,7 @@ export const ContactPage = ({ prefilledScope }) => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         {/* Left Column: Zeigarnik Briefing Wizard */}
         <div className="lg:col-span-8">
-          <div className="rounded-3xl bg-canvas-card border border-border-subtle p-6 sm:p-12 shadow-card-elevated relative overflow-hidden">
+          <div className="rounded-3xl bg-white border border-border-subtle p-6 sm:p-12 shadow-luxury-md relative overflow-hidden">
             {/* Zeigarnik Step Progress Header (01/04) */}
             {!isSubmitted && (
               <div className="pb-8 mb-8 border-b border-border-subtle">
@@ -98,15 +92,15 @@ export const ContactPage = ({ prefilledScope }) => {
                   <span className="text-xs font-mono uppercase tracking-wider text-text-muted">
                     ZEIGARNIK BRIEFING PROGRESS:
                   </span>
-                  <span className="font-mono text-sm font-bold text-accent-volt">
+                  <span className="font-mono text-sm font-bold text-accent-electric">
                     0{currentStep} / 04
                   </span>
                 </div>
 
                 {/* Progress bar */}
-                <div className="w-full h-1.5 bg-canvas-base rounded-full overflow-hidden">
+                <div className="w-full h-1.5 bg-canvas-muted rounded-full overflow-hidden">
                   <motion.div
-                    className="h-full bg-accent-volt shadow-glow-volt"
+                    className="h-full bg-accent-electric"
                     initial={{ width: '25%' }}
                     animate={{ width: `${(currentStep / 4) * 100}%` }}
                     transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
@@ -131,13 +125,13 @@ export const ContactPage = ({ prefilledScope }) => {
                   {currentStep === 1 && (
                     <div className="space-y-6">
                       <div>
-                        <span className="text-xs font-mono text-accent-volt uppercase tracking-wider block mb-1">
+                        <span className="text-xs font-mono text-accent-electric uppercase tracking-wider block mb-1">
                           STAGE 01
                         </span>
                         <h2 className="type-h3 font-display font-bold text-text-primary">
                           Brand & Organization Profile
                         </h2>
-                        <p className="text-xs text-text-secondary mt-1">
+                        <p className="text-xs text-text-secondary mt-1 font-light">
                           Identify the venture and market category you aim to lead.
                         </p>
                       </div>
@@ -155,7 +149,7 @@ export const ContactPage = ({ prefilledScope }) => {
                               setFormData({ ...formData, company: e.target.value })
                             }
                             placeholder="e.g. Aether Spatial Systems"
-                            className="w-full bg-canvas-base border border-border-subtle rounded-xl px-4 py-3.5 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-volt font-mono"
+                            className="w-full bg-canvas-muted border border-border-muted rounded-xl px-4 py-3.5 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-ink font-mono shadow-luxury-sm"
                           />
                         </div>
 
@@ -170,7 +164,7 @@ export const ContactPage = ({ prefilledScope }) => {
                               setFormData({ ...formData, website: e.target.value })
                             }
                             placeholder="https://yourcompany.com"
-                            className="w-full bg-canvas-base border border-border-subtle rounded-xl px-4 py-3.5 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-volt font-mono"
+                            className="w-full bg-canvas-muted border border-border-muted rounded-xl px-4 py-3.5 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-ink font-mono shadow-luxury-sm"
                           />
                         </div>
                       </div>
@@ -181,13 +175,13 @@ export const ContactPage = ({ prefilledScope }) => {
                   {currentStep === 2 && (
                     <div className="space-y-6">
                       <div>
-                        <span className="text-xs font-mono text-accent-volt uppercase tracking-wider block mb-1">
+                        <span className="text-xs font-mono text-accent-electric uppercase tracking-wider block mb-1">
                           STAGE 02
                         </span>
                         <h2 className="type-h3 font-display font-bold text-text-primary">
                           Architectural Scope & Kinetics
                         </h2>
-                        <p className="text-xs text-text-secondary mt-1">
+                        <p className="text-xs text-text-secondary mt-1 font-light">
                           Choose the digital medium and level of interactive immersion required.
                         </p>
                       </div>
@@ -204,14 +198,14 @@ export const ContactPage = ({ prefilledScope }) => {
                               onClick={() => setFormData({ ...formData, scope: opt })}
                               className={`p-4 rounded-xl border text-left text-xs font-mono transition-all ${
                                 formData.scope === opt
-                                  ? 'bg-accent-volt/10 border-accent-volt text-text-primary shadow-glow-volt/20'
-                                  : 'bg-canvas-base border-border-subtle text-text-secondary hover:border-border-focus'
+                                  ? 'bg-accent-ink text-white border-black shadow-luxury-sm'
+                                  : 'bg-canvas-muted border-border-subtle text-text-secondary hover:border-border-muted hover:text-text-primary'
                               }`}
                             >
                               <div className="flex items-center justify-between">
                                 <span>{opt}</span>
                                 {formData.scope === opt && (
-                                  <span className="w-2 h-2 rounded-full bg-accent-volt" />
+                                  <span className="w-2 h-2 rounded-full bg-accent-electric" />
                                 )}
                               </div>
                             </button>
@@ -225,13 +219,13 @@ export const ContactPage = ({ prefilledScope }) => {
                   {currentStep === 3 && (
                     <div className="space-y-6">
                       <div>
-                        <span className="text-xs font-mono text-accent-volt uppercase tracking-wider block mb-1">
+                        <span className="text-xs font-mono text-accent-electric uppercase tracking-wider block mb-1">
                           STAGE 03
                         </span>
                         <h2 className="type-h3 font-display font-bold text-text-primary">
                           Investment Envelope & Launch Cadence
                         </h2>
-                        <p className="text-xs text-text-secondary mt-1">
+                        <p className="text-xs text-text-secondary mt-1 font-light">
                           Transparent allocation ensures tailored staffing of senior technologists.
                         </p>
                       </div>
@@ -248,8 +242,8 @@ export const ContactPage = ({ prefilledScope }) => {
                               onClick={() => setFormData({ ...formData, budget: tier })}
                               className={`p-4 rounded-xl border text-left text-xs font-mono transition-all ${
                                 formData.budget === tier
-                                  ? 'bg-accent-volt/10 border-accent-volt text-text-primary'
-                                  : 'bg-canvas-base border-border-subtle text-text-secondary hover:border-border-focus'
+                                  ? 'bg-accent-ink text-white border-black shadow-luxury-sm'
+                                  : 'bg-canvas-muted border-border-subtle text-text-secondary hover:border-border-muted hover:text-text-primary'
                               }`}
                             >
                               <span className="font-semibold block">{tier}</span>
@@ -264,13 +258,13 @@ export const ContactPage = ({ prefilledScope }) => {
                   {currentStep === 4 && (
                     <div className="space-y-6">
                       <div>
-                        <span className="text-xs font-mono text-accent-volt uppercase tracking-wider block mb-1">
+                        <span className="text-xs font-mono text-accent-electric uppercase tracking-wider block mb-1">
                           STAGE 04
                         </span>
                         <h2 className="type-h3 font-display font-bold text-text-primary">
                           Stakeholder Contacts & Objective
                         </h2>
-                        <p className="text-xs text-text-secondary mt-1">
+                        <p className="text-xs text-text-secondary mt-1 font-light">
                           Our partners will directly reply with an architectural proposal.
                         </p>
                       </div>
@@ -289,7 +283,7 @@ export const ContactPage = ({ prefilledScope }) => {
                                 setFormData({ ...formData, fullName: e.target.value })
                               }
                               placeholder="Elena Rostova"
-                              className="w-full bg-canvas-base border border-border-subtle rounded-xl px-4 py-3.5 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-volt font-mono"
+                              className="w-full bg-canvas-muted border border-border-muted rounded-xl px-4 py-3.5 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-ink font-mono shadow-luxury-sm"
                             />
                           </div>
 
@@ -305,7 +299,7 @@ export const ContactPage = ({ prefilledScope }) => {
                                 setFormData({ ...formData, email: e.target.value })
                               }
                               placeholder="elena@enterprise.com"
-                              className="w-full bg-canvas-base border border-border-subtle rounded-xl px-4 py-3.5 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-volt font-mono"
+                              className="w-full bg-canvas-muted border border-border-muted rounded-xl px-4 py-3.5 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-ink font-mono shadow-luxury-sm"
                             />
                           </div>
                         </div>
@@ -321,7 +315,7 @@ export const ContactPage = ({ prefilledScope }) => {
                               setFormData({ ...formData, brief: e.target.value })
                             }
                             placeholder="Describe your core business objectives, desired visual direction, or upcoming milestones..."
-                            className="w-full bg-canvas-base border border-border-subtle rounded-xl px-4 py-3.5 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-volt font-mono"
+                            className="w-full bg-canvas-muted border border-border-muted rounded-xl px-4 py-3.5 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-ink font-mono shadow-luxury-sm"
                           />
                         </div>
                       </div>
@@ -356,24 +350,24 @@ export const ContactPage = ({ prefilledScope }) => {
                   transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   className="py-10 text-center space-y-6"
                 >
-                  <div className="w-16 h-16 rounded-full bg-accent-volt/10 border border-accent-volt/30 text-accent-volt flex items-center justify-center mx-auto shadow-glow-volt">
+                  <div className="w-16 h-16 rounded-full bg-accent-electric/10 text-accent-electric flex items-center justify-center mx-auto shadow-luxury-sm">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
 
                   <div>
-                    <span className="text-xs font-mono uppercase tracking-eyebrow text-accent-volt block mb-2">
+                    <span className="text-xs font-mono uppercase tracking-eyebrow text-accent-electric block mb-2">
                       [ BRIEF RECEIVED · TICKET #IMM-2026-849 ]
                     </span>
                     <h2 className="type-h2 font-display font-bold text-text-primary mb-3">
                       Thank You, {formData.fullName || 'Partner'}.
                     </h2>
-                    <p className="text-sm text-text-secondary max-w-lg mx-auto leading-relaxed">
-                      Your project brief for <strong className="text-text-primary">{formData.company || 'your venture'}</strong> has been assigned to our Executive Creative Director. Expect a confidential architectural review within 4 business hours.
+                    <p className="text-sm text-text-secondary max-w-lg mx-auto leading-relaxed font-light">
+                      Your project brief for <strong className="text-text-primary font-medium">{formData.company || 'your venture'}</strong> has been assigned to our Executive Creative Director. Expect a confidential architectural review within 4 business hours.
                     </p>
                   </div>
 
                   {/* Parameter Review Card */}
-                  <div className="max-w-md mx-auto p-5 rounded-2xl bg-canvas-base border border-border-subtle text-left font-mono text-xs space-y-2">
+                  <div className="max-w-md mx-auto p-5 rounded-2xl bg-canvas-muted border border-border-subtle text-left font-mono text-xs space-y-2 shadow-luxury-sm">
                     <div className="flex justify-between border-b border-border-subtle pb-2">
                       <span className="text-text-muted">Scope:</span>
                       <span className="text-text-primary font-semibold">{formData.scope}</span>
@@ -384,14 +378,14 @@ export const ContactPage = ({ prefilledScope }) => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-text-muted">Contact:</span>
-                      <span className="text-accent-volt font-semibold">{formData.email}</span>
+                      <span className="text-accent-ink font-semibold">{formData.email}</span>
                     </div>
                   </div>
 
                   <div className="pt-4">
                     <button
                       onClick={handleReset}
-                      className="inline-flex items-center gap-2 text-xs font-mono text-text-muted hover:text-accent-volt transition-colors"
+                      className="inline-flex items-center gap-2 text-xs font-mono text-text-muted hover:text-text-primary transition-colors"
                     >
                       <RotateCcw className="w-3.5 h-3.5" />
                       <span>Submit another brief</span>
@@ -406,27 +400,27 @@ export const ContactPage = ({ prefilledScope }) => {
         {/* Right Column: Direct Office Coordinates & SLA */}
         <div className="lg:col-span-4 space-y-6">
           {/* SLA Card */}
-          <div className="p-6 rounded-3xl bg-canvas-card border border-border-subtle shadow-inner-bevel space-y-4">
-            <div className="flex items-center gap-2 text-accent-volt">
+          <div className="p-6 rounded-3xl bg-white border border-border-subtle shadow-luxury-sm space-y-3">
+            <div className="flex items-center gap-2 text-accent-electric">
               <Clock className="w-4 h-4" />
               <span className="text-xs font-mono font-semibold uppercase tracking-wider">
                 Direct Partner SLA
               </span>
             </div>
-            <p className="text-xs text-text-secondary leading-relaxed">
+            <p className="text-xs text-text-secondary leading-relaxed font-light">
               We respond to all verified enterprise inquiries in &lt; 4 hours with an initial architectural assessment and timeline matrix.
             </p>
           </div>
 
           {/* Direct Email */}
-          <div className="p-6 rounded-3xl bg-canvas-card border border-border-subtle shadow-inner-bevel space-y-3">
+          <div className="p-6 rounded-3xl bg-white border border-border-subtle shadow-luxury-sm space-y-3">
             <span className="text-xs font-mono uppercase tracking-eyebrow text-text-muted block">
               Direct Contact
             </span>
             <div className="font-mono text-sm text-text-primary">
               <a
                 href="mailto:partners@immersive.studio"
-                className="hover:text-accent-volt transition-colors block"
+                className="hover:text-accent-electric transition-colors block font-semibold"
               >
                 partners@immersive.studio
               </a>
@@ -435,7 +429,7 @@ export const ContactPage = ({ prefilledScope }) => {
           </div>
 
           {/* Global Studio Hubs */}
-          <div className="p-6 rounded-3xl bg-canvas-card border border-border-subtle shadow-inner-bevel space-y-4">
+          <div className="p-6 rounded-3xl bg-white border border-border-subtle shadow-luxury-sm space-y-4">
             <span className="text-xs font-mono uppercase tracking-eyebrow text-text-muted block">
               Studio Locations
             </span>
