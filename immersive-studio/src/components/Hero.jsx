@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { MagneticButton } from './MagneticButton';
-import { ArrowDownRight, Sparkles, Terminal, Play, Cpu, Zap, ShieldCheck } from 'lucide-react';
+import { ArrowDownRight, Play, Cpu, Zap, ShieldCheck } from 'lucide-react';
 import { sound } from '../utils/soundEngine';
 
 export const Hero = ({ onOpenInquiry, onOpenCaseStudy }) => {
-  const [reelPlaying, setReelPlaying] = useState(false);
-
   const handleScrollToWork = () => {
     sound.playTactile(600, 0.04);
     const workElem = document.getElementById('work');
