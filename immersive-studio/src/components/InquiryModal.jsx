@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, Sparkles, CheckCircle2, ShieldCheck, Clock, FileText } from 'lucide-react';
+import { X, Send, CheckCircle2, ShieldCheck } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { MagneticButton } from './MagneticButton';
 import { sound } from '../utils/soundEngine';
@@ -36,7 +36,6 @@ export const InquiryModal = ({ isOpen, onClose, initialScope }) => {
     e.preventDefault();
     sound.playSuccess();
 
-    // Trigger celebration confetti
     try {
       confetti({
         particleCount: 80,
@@ -236,7 +235,6 @@ export const InquiryModal = ({ isOpen, onClose, initialScope }) => {
               </form>
             </div>
           ) : (
-            /* Success confirmation screen */
             <div className="text-center py-8 space-y-6">
               <div className="w-16 h-16 rounded-2xl bg-accent-primary/10 border border-accent-primary/30 text-accent-primary mx-auto flex items-center justify-center">
                 <CheckCircle2 className="w-8 h-8" />
@@ -254,7 +252,6 @@ export const InquiryModal = ({ isOpen, onClose, initialScope }) => {
                 </p>
               </div>
 
-              {/* Reference Ticket Box */}
               <div className="p-4 rounded-2xl bg-canvas-surface border border-border-subtle max-w-sm mx-auto font-mono text-xs space-y-2">
                 <div className="flex justify-between text-text-muted">
                   <span>DISPATCH REF:</span>
