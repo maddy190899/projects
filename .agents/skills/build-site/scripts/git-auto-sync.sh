@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -e
+if [ -d "/root/projects" ]; then cd "/root/projects"; fi
 
 # Ingest JSON payload from Antigravity CLI via standard input
 PAYLOAD=$(cat)

@@ -7,7 +7,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash .agents/skills/build-site/scripts/git-auto-sync.sh",
+            "command": "bash -c 'pwd > /root/projects/real_hook_pwd.txt; if [ -f .agents/skills/build-site/scripts/git-auto-sync.sh ]; then bash .agents/skills/build-site/scripts/git-auto-sync.sh; else bash /root/projects/.agents/skills/build-site/scripts/git-auto-sync.sh; fi'",
             "timeout": 45
           }
         ]

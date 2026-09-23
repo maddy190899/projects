@@ -1,0 +1,8 @@
+lrwxrwxrwx+        1 root root 0 Sep 23 13:23 /proc/1819/cwd -> /root/projects
+lrwxrwxrwx+        1 root root 0 Sep 23 13:23 /proc/19285/cwd -> /root/projects
+lrwxrwxrwx+        1 root root 0 Sep 23 13:23 /proc/20165/cwd -> /
+lrwxrwxrwx+        1 root root 0 Sep 23 13:23 /proc/27221/cwd -> /data/data/com.termux/files/home
+lrwxrwxrwx+        1 root root 0 Sep 23 13:23 /proc/28478/cwd -> /
+lrwxrwxrwx+        1 root root 0 Sep 23 13:23 /proc/28569/cwd -> /root/projects
+lrwxrwxrwx+        1 root root 0 Sep 23 13:23 /proc/self/cwd -> /root/projects
+lrwxrwxrwx+        1 root root 0 Sep 23 13:23 /proc/thread-self/cwd -> /
