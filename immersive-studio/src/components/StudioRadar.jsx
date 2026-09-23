@@ -1,34 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Activity, Cpu, Gauge, Zap, Globe, Server, CheckCircle2, ShieldAlert } from 'lucide-react';
-import { BentoCard } from './BentoCard';
-import { sound } from '../utils/soundEngine';
+import { Cpu, Gauge, Zap, Globe, Server, CheckCircle2 } from 'lucide-react';
+
+const getInitialGpuInfo = () => {
+  if (typeof window === 'undefined') return 'GPU Pipeline Standard';
+  try {
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (gl) {
+      const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+      if (debugInfo) {
+        const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+        return renderer || 'Hardware Accelerated WebGL 2.0';
+      }
+      return 'Hardware Accelerated WebGL 2.0';
+    }
+    return 'GPU Pipeline Standard';
+  } catch {
+    return 'GPU Pipeline Standard';
+  }
+};
 
 export const StudioRadar = () => {
   const [fps, setFps] = useState(60);
-  const [gpuInfo, setGpuInfo] = useState('Detecting hardware renderer...');
+  const [gpuInfo] = useState(getInitialGpuInfo);
   const [latency, setLatency] = useState(24);
 
   useEffect(() => {
-    // Detect WebGL GPU Renderer
-    try {
-      const canvas = document.createElement('canvas');
-      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-      if (gl) {
-        const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
-        if (debugInfo) {
-          const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
-          setGpuInfo(renderer || 'Hardware Accelerated WebGL 2.0');
-        } else {
-          setGpuInfo('Hardware Accelerated WebGL 2.0');
-        }
-      } else {
-        setGpuInfo('GPU Pipeline Standard');
-      }
-    } catch {
-      setGpuInfo('GPU Pipeline Standard');
-    }
-
     // Live FPS meter using requestAnimationFrame
     let frameCount = 0;
     let lastTime = performance.now();
