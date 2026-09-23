@@ -1,138 +1,149 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Volume2, VolumeX, Menu, X, ArrowUpRight, Sparkles, Terminal } from 'lucide-react';
+import { Volume2, VolumeX, Menu, X, ArrowUpRight } from 'lucide-react';
 
-export default function Navbar({ onOpenQuoteModal }) {
+export default function Navbar({ onOpenInquiry, setCursorText }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [soundEnabled, setSoundEnabled] = useState(false);
+  const [soundOn, setSoundOn] = useState(false);
+  const [studioTime, setStudioTime] = useState('');
 
-  // Play subtle futuristic cyber beep using Web Audio API on click if sound is enabled
-  const playSfx = (freq = 440, type = 'sine', duration = 0.08) => {
-    if (!soundEnabled) return;
+  // Subtle analogue tactile click using Web Audio API
+  const playClick = (freq = 320) => {
+    if (!soundOn) return;
     try {
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = type;
-      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-      gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, ctx.currentTime);
+      gain.gain.setValueAtTime(0.03, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.05);
       osc.connect(gain);
-      gain.connect(audioCtx.destination);
+      gain.connect(ctx.destination);
       osc.start();
-      osc.stop(audioCtx.currentTime + duration);
+      osc.stop(ctx.currentTime + 0.05);
     } catch {
-      // Audio context fallback
+      // Audio fallback
     }
   };
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 40);
     };
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    const updateClock = () => {
+      const now = new Date();
+      const paris = now.toLocaleTimeString('en-GB', { timeZone: 'Europe/Paris', hour: '2-digit', minute: '2-digit' });
+      setStudioTime(`PAR ${paris}`);
+    };
+    updateClock();
+    const timer = setInterval(updateClock, 1000);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearInterval(timer);
+    };
   }, []);
 
-  const navLinks = [
-    { label: "Portfolio", href: "#portfolio" },
-    { label: "Services", href: "#services" },
-    { label: "Bento Stack", href: "#bento" },
-    { label: "Estimator", href: "#estimator" },
-    { label: "Studio", href: "#studio" },
-    { label: "FAQ", href: "#faq" }
+  const navItems = [
+    { num: "01", label: "SELECTED WORK", href: "#work" },
+    { num: "02", label: "INTERACTIVE LAB", href: "#lab" },
+    { num: "03", label: "DISCIPLINE", href: "#disciplines" },
+    { num: "04", label: "RECOGNITION", href: "#recognition" },
+    { num: "05", label: "MANIFESTO", href: "#manifesto" }
   ];
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
       scrolled 
-        ? "bg-[#090A0F]/85 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-black/50 py-3" 
-        : "bg-transparent py-5"
+        ? "bg-[#09090b]/90 backdrop-blur-md border-b border-chalk py-3.5" 
+        : "bg-transparent py-6"
     }`}>
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <div className="max-w-[1600px] mx-auto px-6 sm:px-10 flex items-center justify-between">
         
-        {/* Brand Logo */}
+        {/* Brand Lockup */}
         <a 
-          href="#" 
-          onClick={() => playSfx(600, 'triangle')}
+          href="#"
+          onClick={() => playClick(440)}
+          onMouseEnter={() => setCursorText?.("HOME")}
+          onMouseLeave={() => setCursorText?.("")}
           className="flex items-center gap-3 group cursor-pointer"
         >
-          <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 via-indigo-600 to-purple-600 p-[1.5px] transition-transform duration-300 group-hover:scale-105">
-            <div className="w-full h-full bg-[#090A0F] rounded-[10px] flex items-center justify-center">
-              <svg viewBox="0 0 32 32" className="w-5 h-5 text-cyan-400 fill-none stroke-current stroke-2 group-hover:rotate-12 transition-transform duration-300">
-                <path d="M6 8L16 2L26 8V24L16 30L6 24V8Z" />
-                <path d="M16 2V16M16 16L26 24M16 16L6 24" />
-              </svg>
-            </div>
-          </div>
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
           <div className="flex flex-col">
-            <span className="font-heading font-extrabold text-lg text-white tracking-tight flex items-center gap-1.5">
-              IMMERSIVE <span className="text-cyan-400">STUDIO</span>
+            <span className="font-display font-bold text-sm tracking-widest text-[#f4f3ef] uppercase group-hover:text-white transition-colors">
+              IMMERSIVE <span className="font-serif-editorial lowercase text-xs tracking-normal font-normal text-zinc-400">studio</span>
             </span>
-            <span className="text-[10px] text-slate-400 font-mono-code tracking-wider uppercase">
-              Web & Spatial Engineering
+            <span className="font-mono-tag text-[9px] text-zinc-500 uppercase tracking-widest">
+              PARIS • TOKYO • SF
             </span>
           </div>
         </a>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-1 bg-white/[0.03] border border-white/10 rounded-full px-4 py-1.5 backdrop-blur-md">
-          {navLinks.map((link) => (
+        {/* Editorial Nav Index */}
+        <nav className="hidden lg:flex items-center gap-8">
+          {navItems.map((item) => (
             <a
-              key={link.label}
-              href={link.href}
-              onClick={() => playSfx(480, 'sine')}
-              className="text-sm font-medium text-slate-300 hover:text-white px-3.5 py-1.5 rounded-full transition-colors hover:bg-white/5"
+              key={item.label}
+              href={item.href}
+              onClick={() => playClick(480)}
+              onMouseEnter={() => setCursorText?.(item.num)}
+              onMouseLeave={() => setCursorText?.("")}
+              className="group flex items-center gap-1.5 text-xs font-mono-tag text-zinc-400 hover:text-white transition-colors cursor-pointer"
             >
-              {link.label}
+              <span className="text-[10px] text-zinc-600 group-hover:text-zinc-400 transition-colors">
+                {item.num}
+              </span>
+              <span>{item.label}</span>
             </a>
           ))}
         </nav>
 
-        {/* Controls & Action Buttons */}
-        <div className="hidden lg:flex items-center gap-4">
+        {/* Controls & Action */}
+        <div className="hidden sm:flex items-center gap-6">
           
-          {/* Sound Synthesizer Toggle */}
+          {/* Sound Toggle */}
           <button
             onClick={() => {
-              const next = !soundEnabled;
-              setSoundEnabled(next);
-              if (next) playSfx(520, 'triangle');
+              const next = !soundOn;
+              setSoundOn(next);
+              if (next) playClick(520);
             }}
-            title={soundEnabled ? "Disable UI Audio Feedback" : "Enable Futuristic Audio Feedback"}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono-code transition-all ${
-              soundEnabled 
-                ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40" 
-                : "bg-white/5 text-slate-400 border border-white/10 hover:text-slate-200"
-            }`}
+            onMouseEnter={() => setCursorText?.("AUDIO")}
+            onMouseLeave={() => setCursorText?.("")}
+            className="flex items-center gap-2 text-[11px] font-mono-tag text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer"
           >
-            {soundEnabled ? <Volume2 className="w-3.5 h-3.5 text-cyan-400" /> : <VolumeX className="w-3.5 h-3.5" />}
-            <span>SFX: {soundEnabled ? "ON" : "OFF"}</span>
+            {soundOn ? <Volume2 className="w-3.5 h-3.5 text-white" /> : <VolumeX className="w-3.5 h-3.5 text-zinc-500" />}
+            <span>SOUND: {soundOn ? "ON" : "OFF"}</span>
           </button>
 
-          {/* Primary CTA */}
+          {/* Timezone Indicator */}
+          <span className="font-mono-tag text-[11px] text-zinc-500 border-l border-chalk pl-4">
+            {studioTime || "PAR 12:00"}
+          </span>
+
+          {/* Commission Button */}
           <button
             onClick={() => {
-              playSfx(700, 'sine');
-              onOpenQuoteModal();
+              playClick(600);
+              onOpenInquiry();
             }}
-            className="relative group overflow-hidden px-5 py-2.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-600 hover:opacity-95 shadow-lg shadow-cyan-500/20 transition-all hover:scale-105 cursor-pointer"
+            onMouseEnter={() => setCursorText?.("START")}
+            onMouseLeave={() => setCursorText?.("")}
+            className="px-4 py-2 border border-chalk hover:border-white text-xs font-mono-tag uppercase tracking-wider text-[#f4f3ef] hover:bg-white hover:text-black transition-all duration-300 flex items-center gap-1.5 cursor-pointer"
           >
-            <span className="relative z-10 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-cyan-200" />
-              <span>Start Project</span>
-              <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </span>
-            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+            <span>COMMISSION</span>
+            <ArrowUpRight className="w-3 h-3" />
           </button>
         </div>
 
-        {/* Mobile Hamburger */}
+        {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white"
-          aria-label="Toggle menu"
+          className="lg:hidden p-2 text-zinc-300 hover:text-white cursor-pointer"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -146,41 +157,42 @@ export default function Navbar({ onOpenQuoteModal }) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#090A0F]/95 backdrop-blur-2xl border-b border-white/10 px-6 py-6"
+            className="lg:hidden bg-[#09090b] border-b border-chalk px-6 py-8"
           >
-            <div className="flex flex-col gap-4">
-              {navLinks.map((link) => (
+            <div className="flex flex-col gap-6">
+              {navItems.map((item) => (
                 <a
-                  key={link.label}
-                  href={link.href}
+                  key={item.label}
+                  href={item.href}
                   onClick={() => {
-                    playSfx(480, 'sine');
+                    playClick(440);
                     setMobileMenuOpen(false);
                   }}
-                  className="text-base font-medium text-slate-200 hover:text-cyan-400 py-2 border-b border-white/5"
+                  className="flex items-center justify-between text-lg font-display text-zinc-200 hover:text-white border-b border-chalk pb-3"
                 >
-                  {link.label}
+                  <span>{item.label}</span>
+                  <span className="font-mono-tag text-xs text-zinc-500">{item.num}</span>
                 </a>
               ))}
-              
+
               <div className="flex items-center justify-between pt-2">
                 <button
-                  onClick={() => setSoundEnabled(!soundEnabled)}
-                  className="flex items-center gap-2 text-xs font-mono-code text-slate-300 bg-white/5 px-3 py-2 rounded-lg"
+                  onClick={() => setSoundOn(!soundOn)}
+                  className="font-mono-tag text-xs text-zinc-400"
                 >
-                  {soundEnabled ? <Volume2 className="w-4 h-4 text-cyan-400" /> : <VolumeX className="w-4 h-4" />}
-                  <span>Audio SFX: {soundEnabled ? "Enabled" : "Disabled"}</span>
+                  AUDIO: {soundOn ? "ENABLED" : "MUTED"}
                 </button>
+                <span className="font-mono-tag text-xs text-zinc-500">{studioTime}</span>
               </div>
 
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  onOpenQuoteModal();
+                  onOpenInquiry();
                 }}
-                className="w-full mt-2 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 font-semibold text-white text-center shadow-lg"
+                className="w-full py-3.5 bg-white text-black font-mono-tag text-xs uppercase tracking-widest font-bold text-center mt-2"
               >
-                Start a Project
+                INITIATE COMMISSION
               </button>
             </div>
           </motion.div>
