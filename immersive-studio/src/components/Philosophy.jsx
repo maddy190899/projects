@@ -1,8 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { teamData } from '../data/projectsData';
-import { Terminal, Shield, Sparkles, Compass, Cpu, Layers } from 'lucide-react';
-import { BentoCard } from './BentoCard';
+import { Shield, Compass, Cpu, Layers } from 'lucide-react';
 
 const PROTOCOL_STEPS = [
   {
