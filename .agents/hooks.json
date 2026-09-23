@@ -1,0 +1,17 @@
+{
+  "git-auto-sync": {
+    "enabled": true,
+    "PostToolUse": [
+      {
+        "matcher": "replace_file_content|multi_replace_file_content|write_to_file|run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .agents/skills/build-site/scripts/git-auto-sync.sh",
+            "timeout": 45
+          }
+        ]
+      }
+    ]
+  }
+}
