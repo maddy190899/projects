@@ -1,122 +1,123 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import { SmoothScroll } from './components/SmoothScroll';
+import { InteractiveCanvas } from './components/InteractiveCanvas';
+import { Navbar } from './components/Navbar';
+import { Hero } from './components/Hero';
+import { ProjectGrid } from './components/ProjectGrid';
+import { ShowcaseModal } from './components/ShowcaseModal';
+import { CapabilityMatrix } from './components/CapabilityMatrix';
+import { ProjectCalculator } from './components/ProjectCalculator';
+import { StudioRadar } from './components/StudioRadar';
+import { Laboratory } from './components/Laboratory';
+import { Philosophy } from './components/Philosophy';
+import { Testimonials } from './components/Testimonials';
+import { InquiryModal } from './components/InquiryModal';
+import { Footer } from './components/Footer';
+import { projectsData } from './data/projectsData';
 
-function App() {
-  const [count, setCount] = useState(0)
+export function App() {
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [inquiryOpen, setInquiryOpen] = useState(false);
+  const [initialScope, setInitialScope] = useState(null);
+  const [soundActive, setSoundActive] = useState(false);
+  const [motionReduced, setMotionReduced] = useState(false);
+
+  const handleOpenCaseStudyById = (id) => {
+    const project = projectsData.find(p => p.id === id) || projectsData[0];
+    setSelectedProject(project);
+  };
+
+  const handleCommissionBuild = (projectName) => {
+    setSelectedProject(null);
+    setInitialScope({
+      deliverables: [`Bespoke Flagship based on ${projectName}`],
+      timeline: 'Standard Velocity (8–10 Weeks)',
+      budgetRange: '$50,000 - $100,000'
+    });
+    setInquiryOpen(true);
+  };
+
+  const handleTransferScope = (scopeData) => {
+    setInitialScope(scopeData);
+    setInquiryOpen(true);
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <SmoothScroll>
+      <div className="min-h-screen bg-canvas-base text-text-primary tactile-noise relative selection:bg-accent-primary selection:text-black">
+        {/* Dynamic interactive canvas particle & grid layer */}
+        <InteractiveCanvas />
 
-      <div className="ticks"></div>
+        {/* Global Navigation */}
+        <Navbar
+          onOpenInquiry={() => {
+            setInitialScope(null);
+            setInquiryOpen(true);
+          }}
+          soundActive={soundActive}
+          setSoundActive={setSoundActive}
+          motionReduced={motionReduced}
+          setMotionReduced={setMotionReduced}
+        />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        {/* Main Content Flow */}
+        <main>
+          {/* Hero Section */}
+          <Hero
+            onOpenInquiry={() => {
+              setInitialScope(null);
+              setInquiryOpen(true);
+            }}
+            onOpenCaseStudy={handleOpenCaseStudyById}
+          />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+          {/* 01: Selected Flagship Works */}
+          <ProjectGrid onSelectProject={(project) => setSelectedProject(project)} />
+
+          {/* 02: Capabilities Matrix */}
+          <CapabilityMatrix />
+
+          {/* 03: Interactive Scope & Architecture Configurator */}
+          <ProjectCalculator onTransferScope={handleTransferScope} />
+
+          {/* 04: Studio Telemetry Observatory & Live Hardware GPU Monitor */}
+          <StudioRadar />
+
+          {/* 05: Experimental Lab */}
+          <Laboratory />
+
+          {/* 06: 4-Sprint Protocol & Leadership Team */}
+          <Philosophy />
+
+          {/* 07: Client Proof & Verified Endorsements */}
+          <Testimonials />
+        </main>
+
+        {/* Footer */}
+        <Footer
+          onOpenInquiry={() => {
+            setInitialScope(null);
+            setInquiryOpen(true);
+          }}
+        />
+
+        {/* In-Depth Case Study Modal */}
+        <ShowcaseModal
+          project={selectedProject}
+          isOpen={!!selectedProject}
+          onClose={() => setSelectedProject(null)}
+          onCommissionBuild={handleCommissionBuild}
+        />
+
+        {/* Interactive Engagement Brief Drawer */}
+        <InquiryModal
+          isOpen={inquiryOpen}
+          onClose={() => setInquiryOpen(false)}
+          initialScope={initialScope}
+        />
+      </div>
+    </SmoothScroll>
+  );
 }
 
-export default App
+export default App;
