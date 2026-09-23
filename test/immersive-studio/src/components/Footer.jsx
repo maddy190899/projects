@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { ArrowUp, Sparkles, Globe, Mail, Check, Github, Twitter, Linkedin } from 'lucide-react';
+import { ArrowUp, Sparkles, Globe, Mail, Check } from 'lucide-react';
 
 export default function Footer({ onOpenQuoteModal }) {
   const [email, setEmail] = useState('');
