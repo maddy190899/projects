@@ -4,9 +4,27 @@
 
 @layer base {
   :root {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
+  html {
+    background-color: #FAF9F6;
+    color: #111114;
+    scroll-behavior: auto;
+  }
+
+  body {
+    background-color: #FAF9F6;
+    color: #111114;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Lenis class resets to guarantee smooth scrolling without blocking */
   html.lenis, html.lenis body {
     height: auto;
   }
@@ -19,63 +37,52 @@
     overscroll-behavior: contain;
   }
 
-  .lenis.lenis-stopped {
-    overflow: hidden;
-  }
-
-  body {
-    background-color: #08080A;
-    color: #F5F5F7;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-    overflow-x: hidden;
-  }
-
   /* Mathematical Fluid Typography via clamp() */
   .type-hero {
-    font-size: clamp(2.8rem, 6.8vw + 0.5rem, 7.2rem);
-    line-height: 0.94;
+    font-size: clamp(2.6rem, 6.2vw + 0.5rem, 6.8rem);
+    line-height: 0.95;
     letter-spacing: -0.045em;
   }
 
   .type-h2 {
-    font-size: clamp(2rem, 3.8vw + 0.5rem, 4rem);
-    line-height: 1.04;
+    font-size: clamp(1.85rem, 3.5vw + 0.4rem, 3.75rem);
+    line-height: 1.05;
     letter-spacing: -0.035em;
   }
 
   .type-h3 {
-    font-size: clamp(1.25rem, 1.8vw + 0.3rem, 2.2rem);
-    line-height: 1.2;
+    font-size: clamp(1.2rem, 1.6vw + 0.3rem, 2rem);
+    line-height: 1.25;
     letter-spacing: -0.025em;
   }
 
   .type-body {
-    font-size: clamp(0.95rem, 0.35vw + 0.85rem, 1.15rem);
+    font-size: clamp(0.95rem, 0.35vw + 0.85rem, 1.125rem);
     line-height: 1.65;
   }
 
-  /* Custom subtle scrollbar */
+  /* Refined, minimal gallery scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #08080A;
+    background: #FAF9F6;
   }
   ::-webkit-scrollbar-thumb {
-    background: #1C1D22;
+    background: #D5D4CD;
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #2C2D35;
+    background: #B8B7B0;
   }
 }
 
-/* Tactile material grain overlay */
+/* Tactile organic paper noise overlay */
 .tactile-noise {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.025'/%3E%3C/svg%3E");
 }
 
-/* Accessibility: Reduced motion overrides */
+/* Reduced motion accessibility */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-duration: 0.01ms !important;
