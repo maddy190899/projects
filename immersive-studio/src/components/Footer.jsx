@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowUp, ArrowUpRight, Check, Sparkles, Terminal, Mail, MapPin } from 'lucide-react';
+import { ArrowUp, ArrowUpRight, Check, MapPin } from 'lucide-react';
 import { MagneticButton } from './MagneticButton';
 import { sound } from '../utils/soundEngine';
 
