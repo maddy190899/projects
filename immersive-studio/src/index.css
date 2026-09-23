@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  body {
+    background-color: #08080A;
+    color: #F5F5F7;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    overflow-x: hidden;
+  }
+
+  /* Mathematical Fluid Typography via clamp() */
+  .type-hero {
+    font-size: clamp(2.8rem, 6.8vw + 0.5rem, 7.2rem);
+    line-height: 0.94;
+    letter-spacing: -0.045em;
+  }
+
+  .type-h2 {
+    font-size: clamp(2rem, 3.8vw + 0.5rem, 4rem);
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+  }
+
+  .type-h3 {
+    font-size: clamp(1.25rem, 1.8vw + 0.3rem, 2.2rem);
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
+
+  .type-body {
+    font-size: clamp(0.95rem, 0.35vw + 0.85rem, 1.15rem);
+    line-height: 1.65;
+  }
+
+  /* Custom subtle scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #08080A;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1C1D22;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2C2D35;
+  }
+}
+
+/* Tactile material grain overlay */
+.tactile-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+/* Accessibility: Reduced motion overrides */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
