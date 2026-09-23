@@ -1,75 +1,53 @@
 import { useState } from 'react';
 import SmoothScroll from './components/SmoothScroll';
-import CustomCursor from './components/CustomCursor';
 import Navbar from './components/Navbar';
 import InteractiveHero from './components/InteractiveHero';
-import SelectedWork from './components/SelectedWork';
-import InteractiveCanvasLab from './components/InteractiveCanvasLab';
-import StudioCapabilities from './components/StudioCapabilities';
-import RecognitionAwards from './components/RecognitionAwards';
-import StudioManifesto from './components/StudioManifesto';
-import InquiryDrawer from './components/InquiryDrawer';
-import Footer from './components/Footer';
+import MeetTheHumans from './components/MeetTheHumans';
+import HumanWorkShowcase from './components/HumanWorkShowcase';
+import HowWeWorkTogether from './components/HowWeWorkTogether';
+import StudioDiary from './components/StudioDiary';
+import KindWords from './components/KindWords';
+import WarmFooter from './components/WarmFooter';
+import FriendlyChatModal from './components/FriendlyChatModal';
 
 export default function App() {
-  const [inquiryOpen, setInquiryOpen] = useState(false);
-  const [cursorText, setCursorText] = useState('');
+  const [chatOpen, setChatOpen] = useState(false);
 
   return (
     <SmoothScroll>
-      <div className="min-h-screen bg-[#09090b] text-[#f4f3ef] selection:bg-white selection:text-black relative bg-noise">
+      <div className="min-h-screen bg-warm-paper text-[#1C1917] selection:bg-amber-200 selection:text-stone-900 relative">
         
-        {/* Custom Magnetic Cursor */}
-        <CustomCursor cursorText={cursorText} />
+        {/* Warm Studio Navbar */}
+        <Navbar onOpenChat={() => setChatOpen(true)} />
 
-        {/* Global Editorial Navbar */}
-        <Navbar 
-          onOpenInquiry={() => setInquiryOpen(true)} 
-          setCursorText={setCursorText} 
-        />
-
-        {/* Editorial Main Flow */}
+        {/* Heartfelt Main Flow */}
         <main>
-          {/* Hero Section with Interactive Liquid Canvas */}
-          <InteractiveHero 
-            onOpenInquiry={() => setInquiryOpen(true)} 
-            setCursorText={setCursorText} 
-          />
+          {/* Hero with Tactile Polaroids & Interactive Corkboard */}
+          <InteractiveHero onOpenChat={() => setChatOpen(true)} />
 
-          {/* 01: Selected Commissions (Hover Reveal List + Grid) */}
-          <SelectedWork 
-            setCursorText={setCursorText} 
-            onOpenInquiry={() => setInquiryOpen(true)} 
-          />
+          {/* Real Work We Loved Building */}
+          <HumanWorkShowcase onOpenChat={() => setChatOpen(true)} />
 
-          {/* 02: Interactive Canvas Lab (Procedural Shader Physics Console) */}
-          <InteractiveCanvasLab 
-            setCursorText={setCursorText} 
-          />
+          {/* Meet the Real Humans Behind the Code */}
+          <MeetTheHumans />
 
-          {/* 03: Disciplinary Architecture & Specification Matrix */}
-          <StudioCapabilities 
-            setCursorText={setCursorText} 
-            onOpenInquiry={() => setInquiryOpen(true)} 
-          />
+          {/* How It Actually Feels to Work Together */}
+          <HowWeWorkTogether />
 
-          {/* 04: International Recognition & Press Quotes */}
-          <RecognitionAwards />
+          {/* Behind the Scenes Studio Diary & Radio */}
+          <StudioDiary />
 
-          {/* 05: Studio Manifesto & Founding Partners */}
-          <StudioManifesto />
+          {/* Kind Words From Real Founders */}
+          <KindWords />
         </main>
 
-        {/* Global Footer */}
-        <Footer 
-          onOpenInquiry={() => setInquiryOpen(true)} 
-          setCursorText={setCursorText} 
-        />
+        {/* Warm Studio Footer */}
+        <WarmFooter onOpenChat={() => setChatOpen(true)} />
 
-        {/* Commission / Inquiry Drawer */}
-        <InquiryDrawer 
-          isOpen={inquiryOpen} 
-          onClose={() => setInquiryOpen(false)} 
+        {/* Friendly Coffee Chat Conversation Modal */}
+        <FriendlyChatModal 
+          isOpen={chatOpen} 
+          onClose={() => setChatOpen(false)} 
         />
 
       </div>
