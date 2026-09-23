@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { projectsData } from '../data/projectsData';
-import { BentoCard } from './BentoCard';
-import { MagneticButton } from './MagneticButton';
-import { ArrowUpRight, Award, Zap, Terminal, Sparkles } from 'lucide-react';
+import { ArrowUpRight, Award } from 'lucide-react';
 import { sound } from '../utils/soundEngine';
 
 export const ProjectGrid = ({ onSelectProject }) => {
@@ -60,7 +58,6 @@ export const ProjectGrid = ({ onSelectProject }) => {
       <div className="grid grid-cols-12 gap-6 md:gap-8">
         <AnimatePresence mode="popLayout">
           {filteredProjects.map((project, index) => {
-            // Asymmetric layout logic for dynamic visual rhythm
             const isFeatured = index % 3 === 0;
             const colSpan = isFeatured
               ? 'col-span-12 lg:col-span-8'
