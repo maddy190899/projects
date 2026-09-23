@@ -6,13 +6,15 @@ import {
   Zap,
   Layers,
   Activity,
-  ShieldCheck,
-  CheckCircle2,
-  TrendingUp,
   Award,
-  ChevronRight
+  ChevronRight,
+  TrendingUp,
+  Cpu,
+  ShieldCheck
 } from 'lucide-react';
 import { MagneticButton } from '../components/MagneticButton';
+import { KineticCanvas } from '../components/KineticCanvas';
+import { TiltCard } from '../components/TiltCard';
 import {
   STUDIO_METRICS,
   CLIENT_LOGOS,
@@ -21,83 +23,98 @@ import {
 } from '../data/studioData';
 
 export const HomePage = ({ setActivePage, onSelectCaseStudy }) => {
+  const navigateTo = (pageId) => {
+    setActivePage(pageId);
+    if (window.__lenis) {
+      window.__lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="space-y-32 sm:space-y-44 pt-28 sm:pt-36">
-      {/* 1. HERO SECTION */}
+      {/* 1. HERO SECTION WITH EMBEDDED KINETIC CANVAS */}
       <section className="relative px-6 md:px-12 max-w-7xl mx-auto">
-        {/* Ambient background glow */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-accent-volt/5 blur-[120px] rounded-full pointer-events-none" />
-
-        <div className="relative z-10 max-w-5xl">
-          {/* Eyebrow metadata badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-border-subtle mb-8"
-          >
-            <span className="w-2 h-2 rounded-full bg-accent-volt animate-pulse" />
-            <span className="text-xs font-mono tracking-eyebrow text-text-secondary uppercase">
-              CREATIVE DIGITAL ENGINEERING · AWWWARDS SOTD JURY
-            </span>
-          </motion.div>
-
-          {/* Primary Fluid Display Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="type-hero font-display font-bold text-text-primary tracking-tight mb-8"
-          >
-            WE ARCHITECT <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-volt via-white to-text-secondary">INTERACTIVE WEBSITES</span> THAT HELP ANY BUSINESS GROW ONLINE.
-          </motion.h1>
-
-          {/* Narrative Lead Paragraph */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-text-secondary type-body max-w-2xl leading-relaxed mb-10"
-          >
-            Rejecting static templates and clichéd layouts. We combine neuro-perceptual behavioral UX, 60/120fps kinetic motion physics, and sub-second Core Web Vitals to convert passive visitors into committed commercial buyers.
-          </motion.p>
-
-          {/* Dual Action Triggers */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-wrap items-center gap-4"
-          >
-            <MagneticButton
-              variant="primary"
-              onClick={() => setActivePage('contact')}
-              className="py-4 px-8 text-sm"
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:items-center">
+          {/* Left Column: Haute Editorial Typography */}
+          <div className="lg:col-span-6 space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white border border-border-muted shadow-luxury-sm"
             >
-              <span>Initiate Briefing</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </MagneticButton>
+              <span className="w-2 h-2 rounded-full bg-accent-electric animate-pulse" />
+              <span className="text-xs font-mono tracking-eyebrow text-text-secondary uppercase">
+                HAUTE CREATIVE ENGINEERING · SOTD JURY
+              </span>
+            </motion.div>
 
-            <MagneticButton
-              variant="secondary"
-              onClick={() => setActivePage('work')}
-              className="py-4 px-8 text-sm"
+            <motion.h1
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="type-hero font-display font-bold text-text-primary tracking-tight"
             >
-              <span>Explore Selected Work (06)</span>
-            </MagneticButton>
+              WE ARCHITECT <span className="font-serif italic font-normal text-accent-electric">INTERACTIVE</span> DIGITAL WORLDS THAT GROW COMMERCE.
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="text-text-secondary type-body max-w-xl font-light leading-relaxed"
+            >
+              Rejecting generic templates and static corporate sites. We synthesize neuro-perceptual behavioral UX, 60/120fps kinetic motion physics, and sub-second Core Web Vitals to convert visitors into loyal enterprise buyers.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-wrap items-center gap-4 pt-2"
+            >
+              <MagneticButton
+                variant="primary"
+                onClick={() => navigateTo('contact')}
+                className="py-4 px-8 text-sm"
+              >
+                <span>Initiate Briefing</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </MagneticButton>
+
+              <MagneticButton
+                variant="secondary"
+                onClick={() => navigateTo('work')}
+                className="py-4 px-8 text-sm"
+              >
+                <span>Selected Work (04)</span>
+              </MagneticButton>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Live Interactive Kinetic Simulation */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-6"
+          >
+            <KineticCanvas />
           </motion.div>
         </div>
 
         {/* Global Client Marquee */}
         <div className="mt-20 pt-10 border-t border-border-subtle overflow-hidden">
           <p className="text-[11px] font-mono tracking-eyebrow text-text-muted uppercase mb-6 text-center sm:text-left">
-            ENGINEERED DIGITAL PLATFORMS FOR VISIONARY ENTERPRISES
+            ENGINEERED PLATFORMS FOR AMBITIOUS GLOBAL ENTERPRISES
           </p>
-          <div className="flex items-center gap-12 overflow-x-auto no-scrollbar opacity-60 hover:opacity-100 transition-opacity">
+          <div className="flex items-center gap-12 overflow-x-auto no-scrollbar opacity-70 hover:opacity-100 transition-opacity">
             {CLIENT_LOGOS.map((client, i) => (
               <span
                 key={i}
-                className="font-display font-bold text-sm tracking-widest text-text-secondary whitespace-nowrap"
+                className="font-display font-bold text-sm tracking-widest text-text-secondary whitespace-nowrap hover:text-text-primary transition-colors cursor-default"
               >
                 {client}
               </span>
@@ -112,13 +129,13 @@ export const HomePage = ({ setActivePage, onSelectCaseStudy }) => {
           {STUDIO_METRICS.map((metric, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 25 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="p-6 sm:p-8 rounded-3xl bg-canvas-card border border-border-subtle shadow-inner-bevel hover:border-border-focus transition-colors"
+              className="p-6 sm:p-8 rounded-3xl bg-white border border-border-subtle shadow-luxury-sm hover:shadow-luxury-md hover:border-border-muted transition-all"
             >
-              <div className="type-h2 font-display font-bold text-accent-volt tracking-tight mb-2">
+              <div className="type-h2 font-display font-bold text-accent-ink tracking-tight mb-2">
                 {metric.value}
               </div>
               <div className="font-display font-semibold text-sm text-text-primary mb-1">
@@ -132,118 +149,125 @@ export const HomePage = ({ setActivePage, onSelectCaseStudy }) => {
         </div>
       </section>
 
-      {/* 3. ASYMMETRIC BENTO GRID ARCHITECTURE */}
+      {/* 3. 3D PERSPECTIVE TILT BENTO MATRIX */}
       <section className="px-6 md:px-12 max-w-7xl mx-auto">
         <div className="mb-12">
-          <span className="text-xs font-mono uppercase tracking-eyebrow text-accent-volt block mb-3">
+          <span className="text-xs font-mono uppercase tracking-eyebrow text-accent-electric block mb-3">
             [ ARCHITECTURAL CAPABILITY MATRIX ]
           </span>
           <h2 className="type-h2 font-display font-bold text-text-primary max-w-3xl">
-            Where Cinematic Art Direction Meets Computational Performance.
+            Where Haute Visual Art Direction Meets Algorithmic Performance.
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-          {/* Bento Card 1: Kinetic Physics Engine */}
-          <div className="md:col-span-8 p-8 sm:p-10 rounded-3xl bg-canvas-card border border-border-subtle shadow-card-elevated relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-80 h-80 bg-accent-volt/5 rounded-full blur-3xl pointer-events-none group-hover:bg-accent-volt/10 transition-colors" />
-            <div className="relative z-10 flex flex-col justify-between h-full">
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-canvas-base border border-border-subtle flex items-center justify-center text-accent-volt mb-6">
-                  <Zap className="w-6 h-6" />
-                </div>
-                <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-2">
-                  01 / GPU KINETICS
-                </span>
-                <h3 className="type-h3 font-display font-bold text-text-primary mb-4">
-                  Lenis Scroll Transport & GSAP Frame Synchronization
-                </h3>
-                <p className="text-text-secondary type-body max-w-xl mb-6">
-                  We decouple scroll momentum from the main UI thread, executing quintic deceleration curves at constant 60/120fps. Layout thrashing is eliminated through strict GPU layer isolation.
-                </p>
+          {/* Bento Card 1: 3D Tilt Card GPU Kinetics */}
+          <TiltCard className="md:col-span-8 p-8 sm:p-10 flex flex-col justify-between group">
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-canvas-muted border border-border-subtle flex items-center justify-center text-accent-ink mb-6 shadow-luxury-sm">
+                <Zap className="w-6 h-6 text-accent-electric" />
               </div>
+              <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-2">
+                01 / KINETIC ENGINE
+              </span>
+              <h3 className="type-h3 font-display font-bold text-text-primary mb-4">
+                Lenis Scroll Momentum & Centralized GSAP Frame Ticker
+              </h3>
+              <p className="text-text-secondary type-body max-w-xl mb-6 font-light">
+                We decouple scroll momentum from the DOM layout thread, executing quintic deceleration curves at constant 60/120fps. Layout reflows are prevented through strict GPU layer isolation.
+              </p>
+            </div>
 
-              <div className="pt-6 border-t border-border-subtle grid grid-cols-3 gap-4 font-mono text-xs text-text-muted">
-                <div>
-                  <span className="text-text-primary block font-semibold">120 FPS</span>
-                  <span>Frame Budget</span>
-                </div>
-                <div>
-                  <span className="text-text-primary block font-semibold">lagSmoothing(0)</span>
-                  <span>Zero Desync</span>
-                </div>
-                <div>
-                  <span className="text-text-primary block font-semibold">WCAG 2.2 AA</span>
-                  <span>Reduced Motion</span>
-                </div>
+            <div className="pt-6 border-t border-border-subtle grid grid-cols-3 gap-4 font-mono text-xs text-text-muted">
+              <div>
+                <span className="text-text-primary block font-semibold">120 FPS</span>
+                <span>Frame Rate</span>
+              </div>
+              <div>
+                <span className="text-text-primary block font-semibold">lagSmoothing(0)</span>
+                <span>Zero Tearing</span>
+              </div>
+              <div>
+                <span className="text-text-primary block font-semibold">WCAG 2.2 AA</span>
+                <span>Reduced Motion</span>
               </div>
             </div>
-          </div>
+          </TiltCard>
 
           {/* Bento Card 2: Neuro-Perceptual UX */}
-          <div className="md:col-span-4 p-8 rounded-3xl bg-canvas-card border border-border-subtle shadow-card-elevated relative overflow-hidden group">
-            <div className="w-12 h-12 rounded-2xl bg-canvas-base border border-border-subtle flex items-center justify-center text-accent-volt mb-6">
-              <Layers className="w-6 h-6" />
+          <TiltCard className="md:col-span-4 p-8 flex flex-col justify-between group">
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-canvas-muted border border-border-subtle flex items-center justify-center text-accent-ink mb-6 shadow-luxury-sm">
+                <Layers className="w-6 h-6 text-accent-electric" />
+              </div>
+              <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-2">
+                02 / COGNITIVE SCIENCE
+              </span>
+              <h3 className="type-h3 font-display font-bold text-text-primary mb-4">
+                Neuro-Perceptual UX
+              </h3>
+              <p className="text-text-secondary text-sm leading-relaxed mb-6 font-light">
+                Employing Gestalt spatial groupings, Fitts’s Law magnetic cursor spring affordance, and Hick-Hyman cognitive minimization to accelerate buyer decision velocity.
+              </p>
             </div>
-            <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-2">
-              02 / COGNITIVE ERGONOMICS
-            </span>
-            <h3 className="type-h3 font-display font-bold text-text-primary mb-4">
-              Neuro-Perceptual UX Science
-            </h3>
-            <p className="text-text-secondary text-sm leading-relaxed mb-6">
-              Leveraging Gestalt spatial groupings, Fitts’s Law magnetic cursor affordance, and Hick-Hyman cognitive minimization to accelerate buyer decision velocity.
-            </p>
-            <div className="p-4 rounded-xl bg-canvas-base border border-border-subtle text-xs font-mono text-accent-volt">
+            <div className="p-4 rounded-xl bg-canvas-muted border border-border-subtle text-xs font-mono text-accent-ink font-semibold">
               Average Conversion Lift: +240%
             </div>
-          </div>
+          </TiltCard>
 
-          {/* Bento Card 3: 3D WebGL Configurator */}
-          <div className="md:col-span-4 p-8 rounded-3xl bg-canvas-card border border-border-subtle shadow-card-elevated relative overflow-hidden group">
-            <div className="w-12 h-12 rounded-2xl bg-canvas-base border border-border-subtle flex items-center justify-center text-accent-volt mb-6">
-              <Sparkles className="w-6 h-6" />
+          {/* Bento Card 3: 3D Spatial Experiences */}
+          <TiltCard className="md:col-span-4 p-8 flex flex-col justify-between group">
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-canvas-muted border border-border-subtle flex items-center justify-center text-accent-ink mb-6 shadow-luxury-sm">
+                <Sparkles className="w-6 h-6 text-accent-electric" />
+              </div>
+              <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-2">
+                03 / SPATIAL WEB
+              </span>
+              <h3 className="type-h3 font-display font-bold text-text-primary mb-4">
+                3D WebGL Digital Twins
+              </h3>
+              <p className="text-text-secondary text-sm leading-relaxed font-light">
+                Real-time interactive architectural configurators, daylight shadow studies, and tactile material shaders that allow clients to physically explore products in the browser.
+              </p>
             </div>
-            <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-2">
-              03 / SPATIAL WEB
-            </span>
-            <h3 className="type-h3 font-display font-bold text-text-primary mb-4">
-              3D WebGL & Custom Shaders
-            </h3>
-            <p className="text-text-secondary text-sm leading-relaxed">
-              Real-time interactive digital twins, lighting simulations, and material configurators that allow customers to physically experience products directly in the browser.
-            </p>
-          </div>
+            <div className="mt-4 pt-4 border-t border-border-subtle text-xs font-mono text-text-muted">
+              THREE.JS · GLSL SHADERS · 60FPS
+            </div>
+          </TiltCard>
 
           {/* Bento Card 4: Sub-Second Core Web Vitals */}
-          <div className="md:col-span-8 p-8 sm:p-10 rounded-3xl bg-canvas-card border border-border-subtle shadow-card-elevated relative overflow-hidden group">
-            <div className="w-12 h-12 rounded-2xl bg-canvas-base border border-border-subtle flex items-center justify-center text-accent-volt mb-6">
-              <Activity className="w-6 h-6" />
+          <TiltCard className="md:col-span-8 p-8 sm:p-10 flex flex-col justify-between group">
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-canvas-muted border border-border-subtle flex items-center justify-center text-accent-ink mb-6 shadow-luxury-sm">
+                <Activity className="w-6 h-6 text-accent-electric" />
+              </div>
+              <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-2">
+                04 / PRODUCTION SPEED
+              </span>
+              <h3 className="type-h3 font-display font-bold text-text-primary mb-4">
+                Sub-Second Core Web Vitals SLA
+              </h3>
+              <p className="text-text-secondary type-body max-w-xl mb-6 font-light">
+                Aesthetics mean nothing if an interface stutters or drops frames on mobile devices. We deliver sub-second LCP, zero CLS, and instant sub-50ms INP responsiveness across all global viewports.
+              </p>
             </div>
-            <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-2">
-              04 / PRODUCTION RESILIENCE
-            </span>
-            <h3 className="type-h3 font-display font-bold text-text-primary mb-4">
-              Uncompromising Core Web Vitals Performance
-            </h3>
-            <p className="text-text-secondary type-body max-w-xl mb-6">
-              High-craft animations mean nothing if your site drops frames or lags on mobile. We engineer sub-second LCP, zero CLS, and instant sub-50ms INP across all global viewports.
-            </p>
+
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div className="p-3.5 rounded-xl bg-canvas-base border border-border-subtle font-mono text-xs">
-                <span className="text-text-muted block">LCP TARGET</span>
-                <span className="text-accent-volt font-bold text-base">&lt; 0.9s</span>
+              <div className="p-4 rounded-xl bg-canvas-muted border border-border-subtle font-mono text-xs">
+                <span className="text-text-muted block mb-1">LCP TARGET</span>
+                <span className="text-accent-ink font-bold text-base">&lt; 0.9s</span>
               </div>
-              <div className="p-3.5 rounded-xl bg-canvas-base border border-border-subtle font-mono text-xs">
-                <span className="text-text-muted block">CLS SHIFT</span>
-                <span className="text-accent-volt font-bold text-base">0.00</span>
+              <div className="p-4 rounded-xl bg-canvas-muted border border-border-subtle font-mono text-xs">
+                <span className="text-text-muted block mb-1">CLS SHIFT</span>
+                <span className="text-accent-ink font-bold text-base">0.00</span>
               </div>
-              <div className="p-3.5 rounded-xl bg-canvas-base border border-border-subtle font-mono text-xs">
-                <span className="text-text-muted block">INP RESPONSIVENESS</span>
-                <span className="text-accent-volt font-bold text-base">&lt; 50ms</span>
+              <div className="p-4 rounded-xl bg-canvas-muted border border-border-subtle font-mono text-xs">
+                <span className="text-text-muted block mb-1">INP RESPONSE</span>
+                <span className="text-accent-ink font-bold text-base">&lt; 45ms</span>
               </div>
             </div>
-          </div>
+          </TiltCard>
         </div>
       </section>
 
@@ -251,7 +275,7 @@ export const HomePage = ({ setActivePage, onSelectCaseStudy }) => {
       <section className="px-6 md:px-12 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
-            <span className="text-xs font-mono uppercase tracking-eyebrow text-accent-volt block mb-3">
+            <span className="text-xs font-mono uppercase tracking-eyebrow text-accent-electric block mb-3">
               [ PROVEN ENTERPRISE IMPACT ]
             </span>
             <h2 className="type-h2 font-display font-bold text-text-primary">
@@ -261,7 +285,7 @@ export const HomePage = ({ setActivePage, onSelectCaseStudy }) => {
 
           <MagneticButton
             variant="secondary"
-            onClick={() => setActivePage('work')}
+            onClick={() => navigateTo('work')}
             className="self-start md:self-auto"
           >
             <span>View All Projects</span>
@@ -274,22 +298,22 @@ export const HomePage = ({ setActivePage, onSelectCaseStudy }) => {
             <div
               key={item.id}
               onClick={() => onSelectCaseStudy(item)}
-              className="group cursor-pointer rounded-3xl bg-canvas-card border border-border-subtle hover:border-border-focus transition-all duration-500 overflow-hidden shadow-card-elevated flex flex-col justify-between"
+              className="group cursor-pointer rounded-3xl bg-white border border-border-subtle hover:border-border-muted hover:shadow-luxury-lg transition-all duration-500 overflow-hidden flex flex-col justify-between"
             >
-              <div className="relative aspect-[16/10] overflow-hidden bg-canvas-surface">
+              <div className="relative aspect-[16/10] overflow-hidden bg-canvas-muted">
                 <img
                   src={item.heroImage}
                   alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-103"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
                 <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-xs font-mono text-accent-volt">
+                  <span className="px-3.5 py-1 rounded-full bg-white/95 backdrop-blur-md border border-black/10 text-xs font-mono text-text-primary font-medium shadow-luxury-sm">
                     {item.category}
                   </span>
                 </div>
                 <div className="absolute bottom-4 right-4">
-                  <div className="w-10 h-10 rounded-full bg-accent-volt text-black flex items-center justify-center transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                  <div className="w-12 h-12 rounded-full bg-white text-text-primary flex items-center justify-center transform translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 shadow-luxury-md">
                     <ArrowUpRight className="w-5 h-5" />
                   </div>
                 </div>
@@ -300,16 +324,16 @@ export const HomePage = ({ setActivePage, onSelectCaseStudy }) => {
                   <span>{item.client}</span>
                   <span>{item.year}</span>
                 </div>
-                <h3 className="type-h3 font-display font-bold text-text-primary mb-3 group-hover:text-accent-volt transition-colors">
+                <h3 className="type-h3 font-display font-bold text-text-primary mb-3 group-hover:text-accent-electric transition-colors">
                   {item.title}
                 </h3>
-                <p className="text-sm text-text-secondary leading-relaxed mb-6">
+                <p className="text-sm text-text-secondary leading-relaxed mb-6 font-light">
                   {item.tagline}
                 </p>
 
                 <div className="pt-4 border-t border-border-subtle flex items-center justify-between text-xs font-mono">
                   <span className="text-text-muted">Primary Result:</span>
-                  <span className="text-accent-volt font-bold">{item.results[0].metric} {item.results[0].label}</span>
+                  <span className="text-accent-ink font-bold">{item.results[0].metric} {item.results[0].label}</span>
                 </div>
               </div>
             </div>
@@ -319,16 +343,16 @@ export const HomePage = ({ setActivePage, onSelectCaseStudy }) => {
 
       {/* 5. THE STUDIO STANDARD COMPARISON */}
       <section className="px-6 md:px-12 max-w-7xl mx-auto">
-        <div className="rounded-3xl bg-canvas-card border border-border-subtle p-8 sm:p-14 shadow-card-elevated">
+        <div className="rounded-3xl bg-white border border-border-subtle p-8 sm:p-14 shadow-luxury-md">
           <div className="mb-10 text-center max-w-2xl mx-auto">
-            <span className="text-xs font-mono uppercase tracking-eyebrow text-accent-volt block mb-3">
+            <span className="text-xs font-mono uppercase tracking-eyebrow text-accent-electric block mb-3">
               [ THE ARCHITECTURAL DIFFERENCE ]
             </span>
             <h2 className="type-h2 font-display font-bold text-text-primary mb-4">
               Standard Digital Agency vs. Immersive Studio
             </h2>
-            <p className="text-sm text-text-secondary leading-relaxed">
-              Why high-growth ventures partner with us rather than conventional marketing agencies.
+            <p className="text-sm text-text-secondary leading-relaxed font-light">
+              Why high-growth ventures partner with our creative technologists rather than conventional marketing agencies.
             </p>
           </div>
 
@@ -342,11 +366,11 @@ export const HomePage = ({ setActivePage, onSelectCaseStudy }) => {
                   {row.metric}
                 </div>
                 <div className="md:col-span-4 text-xs font-mono text-text-muted">
-                  <span className="text-red-400/80 mr-2">✕</span>
+                  <span className="text-rose-500 mr-2">✕</span>
                   {row.standardAgency}
                 </div>
-                <div className="md:col-span-4 text-xs font-mono text-accent-volt font-medium">
-                  <span className="text-accent-volt mr-2">✓</span>
+                <div className="md:col-span-4 text-xs font-mono text-text-primary font-semibold">
+                  <span className="text-emerald-600 mr-2 font-bold">✓</span>
                   {row.immersiveStudio}
                 </div>
               </div>
