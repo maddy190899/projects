@@ -19,7 +19,9 @@ export const InquiryModal = ({ isOpen, onClose, initialScope }) => {
   const [submitted, setSubmitted] = useState(false);
   const [referenceCode, setReferenceCode] = useState('');
 
-  useEffect(() => {
+  const [prevScope, setPrevScope] = useState(initialScope);
+  if (initialScope !== prevScope) {
+    setPrevScope(initialScope);
     if (initialScope) {
       setFormData(prev => ({
         ...prev,
@@ -28,7 +30,7 @@ export const InquiryModal = ({ isOpen, onClose, initialScope }) => {
         budget: initialScope.budgetRange || prev.budget
       }));
     }
-  }, [initialScope]);
+  }
 
   if (!isOpen) return null;
 
