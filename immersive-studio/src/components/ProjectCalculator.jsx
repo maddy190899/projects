@@ -70,13 +70,13 @@ export const ProjectCalculator = ({ onProceedToBrief }) => {
   }).format(calculatedCost);
 
   return (
-    <div className="rounded-3xl bg-canvas-card border border-border-subtle p-6 sm:p-10 shadow-card-elevated">
+    <div className="rounded-3xl bg-white border border-border-subtle p-6 sm:p-10 shadow-luxury-md">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-10 h-10 rounded-xl bg-accent-volt/10 border border-accent-volt/20 flex items-center justify-center text-accent-volt">
+        <div className="w-10 h-10 rounded-xl bg-canvas-muted border border-border-subtle flex items-center justify-center text-accent-electric shadow-luxury-sm">
           <Calculator className="w-5 h-5" />
         </div>
         <div>
-          <span className="text-xs font-mono uppercase tracking-eyebrow text-accent-volt block">
+          <span className="text-xs font-mono uppercase tracking-eyebrow text-accent-electric block">
             [ INTERACTIVE SCOPE ESTIMATOR ]
           </span>
           <h3 className="type-h3 font-display font-semibold text-text-primary">
@@ -85,8 +85,8 @@ export const ProjectCalculator = ({ onProceedToBrief }) => {
         </div>
       </div>
 
-      <p className="text-sm text-text-secondary leading-relaxed mb-8 max-w-2xl">
-        Select your foundational requirements below to generate instant architectural scope projections, anticipated conversion multipliers, and estimated production schedules.
+      <p className="text-sm text-text-secondary leading-relaxed mb-8 max-w-2xl font-light">
+        Configure your requirements below to generate instant architectural scope projections, anticipated conversion multipliers, and estimated production schedules.
       </p>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -104,19 +104,19 @@ export const ProjectCalculator = ({ onProceedToBrief }) => {
                   onClick={() => setScope(item.id)}
                   className={`p-4 rounded-2xl border text-left transition-all ${
                     scope === item.id
-                      ? 'bg-accent-volt/10 border-accent-volt text-text-primary shadow-glow-volt/20'
-                      : 'bg-canvas-surface border-border-subtle text-text-secondary hover:border-border-focus'
+                      ? 'bg-accent-ink text-white border-black shadow-luxury-sm'
+                      : 'bg-canvas-muted border-border-subtle text-text-secondary hover:border-border-muted hover:text-text-primary'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1">
-                    <span className="font-display font-semibold text-sm text-text-primary">
+                    <span className={`font-display font-semibold text-sm ${scope === item.id ? 'text-white' : 'text-text-primary'}`}>
                       {item.title}
                     </span>
                     {scope === item.id && (
-                      <span className="w-2 h-2 rounded-full bg-accent-volt" />
+                      <span className="w-2 h-2 rounded-full bg-accent-electric" />
                     )}
                   </div>
-                  <p className="text-xs text-text-muted leading-snug">{item.desc}</p>
+                  <p className={`text-xs leading-snug font-light ${scope === item.id ? 'text-white/80' : 'text-text-muted'}`}>{item.desc}</p>
                 </button>
               ))}
             </div>
@@ -134,12 +134,12 @@ export const ProjectCalculator = ({ onProceedToBrief }) => {
                   onClick={() => setKineticTier(tier.id)}
                   className={`w-full p-3.5 rounded-xl border text-left flex items-center justify-between transition-all ${
                     kineticTier === tier.id
-                      ? 'bg-accent-volt/10 border-accent-volt text-text-primary'
-                      : 'bg-canvas-surface border-border-subtle text-text-secondary hover:border-border-focus'
+                      ? 'bg-canvas-base border-accent-ink text-text-primary font-medium shadow-luxury-sm'
+                      : 'bg-canvas-muted border-border-subtle text-text-secondary hover:border-border-muted'
                   }`}
                 >
                   <span className="text-xs font-mono">{tier.label}</span>
-                  {kineticTier === tier.id && <Check className="w-4 h-4 text-accent-volt" />}
+                  {kineticTier === tier.id && <Check className="w-4 h-4 text-accent-electric" />}
                 </button>
               ))}
             </div>
@@ -157,8 +157,8 @@ export const ProjectCalculator = ({ onProceedToBrief }) => {
                   onClick={() => setTimeline(t.id)}
                   className={`p-3 rounded-xl border text-left transition-all ${
                     timeline === t.id
-                      ? 'bg-accent-volt/10 border-accent-volt text-text-primary'
-                      : 'bg-canvas-surface border-border-subtle text-text-secondary hover:border-border-focus'
+                      ? 'bg-accent-ink text-white border-black shadow-luxury-sm'
+                      : 'bg-canvas-muted border-border-subtle text-text-secondary hover:border-border-muted'
                   }`}
                 >
                   <span className="text-xs font-mono block">{t.label}</span>
@@ -169,21 +169,19 @@ export const ProjectCalculator = ({ onProceedToBrief }) => {
         </div>
 
         {/* Live Calculation Projection Card */}
-        <div className="lg:col-span-5 flex flex-col justify-between p-6 sm:p-8 rounded-3xl bg-canvas-surface border border-border-focus shadow-inner-bevel relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-accent-volt/5 rounded-full blur-2xl pointer-events-none" />
-
+        <div className="lg:col-span-5 flex flex-col justify-between p-6 sm:p-8 rounded-3xl bg-canvas-muted border border-border-subtle shadow-luxury-md relative overflow-hidden">
           <div>
             <div className="flex items-center justify-between pb-4 border-b border-border-subtle mb-6">
               <span className="text-xs font-mono uppercase tracking-widest text-text-muted">
                 PROJECTED INVESTMENT
               </span>
-              <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-accent-volt/10 text-accent-volt border border-accent-volt/20">
+              <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-white text-text-primary border border-black/10 shadow-luxury-sm">
                 PROPOSAL ESTIMATE
               </span>
             </div>
 
             <div className="mb-6">
-              <div className="text-3xl sm:text-4xl font-display font-bold text-accent-volt tracking-tight mb-1">
+              <div className="text-3xl sm:text-4xl font-display font-bold text-accent-ink tracking-tight mb-1">
                 {formattedCost}
               </div>
               <p className="text-xs font-mono text-text-muted">
@@ -195,26 +193,26 @@ export const ProjectCalculator = ({ onProceedToBrief }) => {
             <div className="space-y-4 pt-4 border-t border-border-subtle">
               <div className="flex items-center justify-between text-xs font-mono">
                 <span className="text-text-secondary flex items-center gap-1.5">
-                  <TrendingUp className="w-3.5 h-3.5 text-accent-volt" />
+                  <TrendingUp className="w-3.5 h-3.5 text-accent-electric" />
                   Anticipated Conversion Lift:
                 </span>
-                <span className="text-text-primary font-semibold">{selectedScopeObj.lift}</span>
+                <span className="text-text-primary font-bold">{selectedScopeObj.lift}</span>
               </div>
 
               <div className="flex items-center justify-between text-xs font-mono">
                 <span className="text-text-secondary flex items-center gap-1.5">
-                  <Zap className="w-3.5 h-3.5 text-accent-volt" />
+                  <Zap className="w-3.5 h-3.5 text-accent-electric" />
                   Target Frame Budget:
                 </span>
-                <span className="text-text-primary font-semibold">60/120 fps GPU Composited</span>
+                <span className="text-text-primary font-bold">60/120 fps GPU Composited</span>
               </div>
 
               <div className="flex items-center justify-between text-xs font-mono">
                 <span className="text-text-secondary flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-accent-volt" />
+                  <Sparkles className="w-3.5 h-3.5 text-accent-electric" />
                   Core Web Vitals SLA:
                 </span>
-                <span className="text-text-primary font-semibold">LCP &lt; 0.9s · CLS 0.00</span>
+                <span className="text-text-primary font-bold">LCP &lt; 0.9s · CLS 0.00</span>
               </div>
             </div>
           </div>
