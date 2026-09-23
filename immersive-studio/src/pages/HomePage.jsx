@@ -10,20 +10,25 @@ import {
   ChevronRight,
   TrendingUp,
   Cpu,
-  ShieldCheck
+  Compass,
+  ArrowRight
 } from 'lucide-react';
 import { MagneticButton } from '../components/MagneticButton';
 import { KineticCanvas } from '../components/KineticCanvas';
-import { TiltCard } from '../components/TiltCard';
+import { ProjectHoverList } from '../components/ProjectHoverList';
+import { InteractiveShowreel } from '../components/InteractiveShowreel';
+import { ShaderLab } from '../components/ShaderLab';
 import {
   STUDIO_METRICS,
   CLIENT_LOGOS,
   CASE_STUDIES,
   COMPARISON_DATA
 } from '../data/studioData';
+import { sound } from '../lib/soundEngine';
 
 export const HomePage = ({ setActivePage, onSelectCaseStudy }) => {
   const navigateTo = (pageId) => {
+    sound.playClick();
     setActivePage(pageId);
     if (window.__lenis) {
       window.__lenis.scrollTo(0, { immediate: true });
@@ -33,82 +38,77 @@ export const HomePage = ({ setActivePage, onSelectCaseStudy }) => {
   };
 
   return (
-    <div className="space-y-32 sm:space-y-44 pt-28 sm:pt-36">
-      {/* 1. HERO SECTION WITH EMBEDDED KINETIC CANVAS */}
+    <div className="space-y-36 sm:space-y-48 pt-28 sm:pt-36">
+      {/* 1. HERO SECTION */}
       <section className="relative px-6 md:px-12 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:items-center">
-          {/* Left Column: Haute Editorial Typography */}
-          <div className="lg:col-span-6 space-y-8">
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white border border-border-muted shadow-luxury-sm"
-            >
-              <span className="w-2 h-2 rounded-full bg-accent-electric animate-pulse" />
-              <span className="text-xs font-mono tracking-eyebrow text-text-secondary uppercase">
-                HAUTE CREATIVE ENGINEERING · SOTD JURY
-              </span>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="type-hero font-display font-bold text-text-primary tracking-tight"
-            >
-              WE ARCHITECT <span className="font-serif italic font-normal text-accent-electric">INTERACTIVE</span> DIGITAL WORLDS THAT GROW COMMERCE.
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="text-text-secondary type-body max-w-xl font-light leading-relaxed"
-            >
-              Rejecting generic templates and static corporate sites. We synthesize neuro-perceptual behavioral UX, 60/120fps kinetic motion physics, and sub-second Core Web Vitals to convert visitors into loyal enterprise buyers.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-wrap items-center gap-4 pt-2"
-            >
-              <MagneticButton
-                variant="primary"
-                onClick={() => navigateTo('contact')}
-                className="py-4 px-8 text-sm"
-              >
-                <span>Initiate Briefing</span>
-                <ArrowUpRight className="w-4 h-4" />
-              </MagneticButton>
-
-              <MagneticButton
-                variant="secondary"
-                onClick={() => navigateTo('work')}
-                className="py-4 px-8 text-sm"
-              >
-                <span>Selected Work (04)</span>
-              </MagneticButton>
-            </motion.div>
-          </div>
-
-          {/* Right Column: Live Interactive Kinetic Simulation */}
+        <div className="space-y-8 max-w-5xl">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-6"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-white border border-border-muted shadow-luxury-sm"
           >
-            <KineticCanvas />
+            <span className="w-2 h-2 rounded-full bg-accent-electric animate-pulse" />
+            <span className="text-xs font-mono tracking-eyebrow text-text-secondary uppercase">
+              PARIS · NEW YORK · TOKYO · SOTD ANNUAL JURY
+            </span>
           </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="type-hero font-display font-extrabold text-text-primary tracking-tight"
+          >
+            WE BUILD DIGITAL EXPERIENCES THAT{' '}
+            <span className="font-serif italic font-normal text-accent-electric underline decoration-1 underline-offset-8">
+              RIVAL REALITY.
+            </span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="text-text-secondary type-body max-w-2xl font-light leading-relaxed"
+          >
+            Most corporate websites are digital tombstones: flat, static, and instantly forgotten. We engineer sensory WebGL flagships, tactile micro-kinetics, and sub-second performance that command obsessive attention and turn visitors into cult followings.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-wrap items-center gap-4 pt-4"
+          >
+            <MagneticButton
+              variant="primary"
+              onClick={() => navigateTo('contact')}
+              className="py-4 px-8 text-sm"
+            >
+              <span>Initiate Briefing</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </MagneticButton>
+
+            <MagneticButton
+              variant="secondary"
+              onClick={() => navigateTo('work')}
+              className="py-4 px-8 text-sm"
+            >
+              <span>Explore Selected Work (05)</span>
+            </MagneticButton>
+          </motion.div>
+        </div>
+
+        {/* Hero Interactive Kinetic Simulation Canvas */}
+        <div className="mt-16">
+          <KineticCanvas />
         </div>
 
         {/* Global Client Marquee */}
         <div className="mt-20 pt-10 border-t border-border-subtle overflow-hidden">
           <p className="text-[11px] font-mono tracking-eyebrow text-text-muted uppercase mb-6 text-center sm:text-left">
-            ENGINEERED PLATFORMS FOR AMBITIOUS GLOBAL ENTERPRISES
+            PARTNERING WITH GLOBAL LEADERS DEFINING THE NEXT DECADE
           </p>
           <div className="flex items-center gap-12 overflow-x-auto no-scrollbar opacity-70 hover:opacity-100 transition-opacity">
             {CLIENT_LOGOS.map((client, i) => (
@@ -123,7 +123,12 @@ export const HomePage = ({ setActivePage, onSelectCaseStudy }) => {
         </div>
       </section>
 
-      {/* 2. VERIFIED BENCHMARK METRICS */}
+      {/* 2. INTERACTIVE SENSORY SHOWREEL DECK */}
+      <section className="px-6 md:px-12 max-w-7xl mx-auto">
+        <InteractiveShowreel onSelectCaseStudy={onSelectCaseStudy} />
+      </section>
+
+      {/* 3. VERIFIED BENCHMARK METRICS */}
       <section className="px-6 md:px-12 max-w-7xl mx-auto">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {STUDIO_METRICS.map((metric, i) => (
@@ -149,137 +154,15 @@ export const HomePage = ({ setActivePage, onSelectCaseStudy }) => {
         </div>
       </section>
 
-      {/* 3. 3D PERSPECTIVE TILT BENTO MATRIX */}
-      <section className="px-6 md:px-12 max-w-7xl mx-auto">
-        <div className="mb-12">
-          <span className="text-xs font-mono uppercase tracking-eyebrow text-accent-electric block mb-3">
-            [ ARCHITECTURAL CAPABILITY MATRIX ]
-          </span>
-          <h2 className="type-h2 font-display font-bold text-text-primary max-w-3xl">
-            Where Haute Visual Art Direction Meets Algorithmic Performance.
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-          {/* Bento Card 1: 3D Tilt Card GPU Kinetics */}
-          <TiltCard className="md:col-span-8 p-8 sm:p-10 flex flex-col justify-between group">
-            <div>
-              <div className="w-12 h-12 rounded-2xl bg-canvas-muted border border-border-subtle flex items-center justify-center text-accent-ink mb-6 shadow-luxury-sm">
-                <Zap className="w-6 h-6 text-accent-electric" />
-              </div>
-              <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-2">
-                01 / KINETIC ENGINE
-              </span>
-              <h3 className="type-h3 font-display font-bold text-text-primary mb-4">
-                Lenis Scroll Momentum & Centralized GSAP Frame Ticker
-              </h3>
-              <p className="text-text-secondary type-body max-w-xl mb-6 font-light">
-                We decouple scroll momentum from the DOM layout thread, executing quintic deceleration curves at constant 60/120fps. Layout reflows are prevented through strict GPU layer isolation.
-              </p>
-            </div>
-
-            <div className="pt-6 border-t border-border-subtle grid grid-cols-3 gap-4 font-mono text-xs text-text-muted">
-              <div>
-                <span className="text-text-primary block font-semibold">120 FPS</span>
-                <span>Frame Rate</span>
-              </div>
-              <div>
-                <span className="text-text-primary block font-semibold">lagSmoothing(0)</span>
-                <span>Zero Tearing</span>
-              </div>
-              <div>
-                <span className="text-text-primary block font-semibold">WCAG 2.2 AA</span>
-                <span>Reduced Motion</span>
-              </div>
-            </div>
-          </TiltCard>
-
-          {/* Bento Card 2: Neuro-Perceptual UX */}
-          <TiltCard className="md:col-span-4 p-8 flex flex-col justify-between group">
-            <div>
-              <div className="w-12 h-12 rounded-2xl bg-canvas-muted border border-border-subtle flex items-center justify-center text-accent-ink mb-6 shadow-luxury-sm">
-                <Layers className="w-6 h-6 text-accent-electric" />
-              </div>
-              <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-2">
-                02 / COGNITIVE SCIENCE
-              </span>
-              <h3 className="type-h3 font-display font-bold text-text-primary mb-4">
-                Neuro-Perceptual UX
-              </h3>
-              <p className="text-text-secondary text-sm leading-relaxed mb-6 font-light">
-                Employing Gestalt spatial groupings, Fitts’s Law magnetic cursor spring affordance, and Hick-Hyman cognitive minimization to accelerate buyer decision velocity.
-              </p>
-            </div>
-            <div className="p-4 rounded-xl bg-canvas-muted border border-border-subtle text-xs font-mono text-accent-ink font-semibold">
-              Average Conversion Lift: +240%
-            </div>
-          </TiltCard>
-
-          {/* Bento Card 3: 3D Spatial Experiences */}
-          <TiltCard className="md:col-span-4 p-8 flex flex-col justify-between group">
-            <div>
-              <div className="w-12 h-12 rounded-2xl bg-canvas-muted border border-border-subtle flex items-center justify-center text-accent-ink mb-6 shadow-luxury-sm">
-                <Sparkles className="w-6 h-6 text-accent-electric" />
-              </div>
-              <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-2">
-                03 / SPATIAL WEB
-              </span>
-              <h3 className="type-h3 font-display font-bold text-text-primary mb-4">
-                3D WebGL Digital Twins
-              </h3>
-              <p className="text-text-secondary text-sm leading-relaxed font-light">
-                Real-time interactive architectural configurators, daylight shadow studies, and tactile material shaders that allow clients to physically explore products in the browser.
-              </p>
-            </div>
-            <div className="mt-4 pt-4 border-t border-border-subtle text-xs font-mono text-text-muted">
-              THREE.JS · GLSL SHADERS · 60FPS
-            </div>
-          </TiltCard>
-
-          {/* Bento Card 4: Sub-Second Core Web Vitals */}
-          <TiltCard className="md:col-span-8 p-8 sm:p-10 flex flex-col justify-between group">
-            <div>
-              <div className="w-12 h-12 rounded-2xl bg-canvas-muted border border-border-subtle flex items-center justify-center text-accent-ink mb-6 shadow-luxury-sm">
-                <Activity className="w-6 h-6 text-accent-electric" />
-              </div>
-              <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-2">
-                04 / PRODUCTION SPEED
-              </span>
-              <h3 className="type-h3 font-display font-bold text-text-primary mb-4">
-                Sub-Second Core Web Vitals SLA
-              </h3>
-              <p className="text-text-secondary type-body max-w-xl mb-6 font-light">
-                Aesthetics mean nothing if an interface stutters or drops frames on mobile devices. We deliver sub-second LCP, zero CLS, and instant sub-50ms INP responsiveness across all global viewports.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div className="p-4 rounded-xl bg-canvas-muted border border-border-subtle font-mono text-xs">
-                <span className="text-text-muted block mb-1">LCP TARGET</span>
-                <span className="text-accent-ink font-bold text-base">&lt; 0.9s</span>
-              </div>
-              <div className="p-4 rounded-xl bg-canvas-muted border border-border-subtle font-mono text-xs">
-                <span className="text-text-muted block mb-1">CLS SHIFT</span>
-                <span className="text-accent-ink font-bold text-base">0.00</span>
-              </div>
-              <div className="p-4 rounded-xl bg-canvas-muted border border-border-subtle font-mono text-xs">
-                <span className="text-text-muted block mb-1">INP RESPONSE</span>
-                <span className="text-accent-ink font-bold text-base">&lt; 45ms</span>
-              </div>
-            </div>
-          </TiltCard>
-        </div>
-      </section>
-
-      {/* 4. FEATURED CASE STUDIES REEL */}
+      {/* 4. INTERACTIVE PROJECT HOVER LIST WITH FLOATING IMAGE REVEAL */}
       <section className="px-6 md:px-12 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
             <span className="text-xs font-mono uppercase tracking-eyebrow text-accent-electric block mb-3">
-              [ PROVEN ENTERPRISE IMPACT ]
+              [ HOVER TO REVEAL VISUAL ARTIFACTS ]
             </span>
             <h2 className="type-h2 font-display font-bold text-text-primary">
-              Featured Case Studies
+              Selected Flagship Builds
             </h2>
           </div>
 
@@ -288,60 +171,20 @@ export const HomePage = ({ setActivePage, onSelectCaseStudy }) => {
             onClick={() => navigateTo('work')}
             className="self-start md:self-auto"
           >
-            <span>View All Projects</span>
+            <span>Full Archive (05)</span>
             <ChevronRight className="w-4 h-4" />
           </MagneticButton>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {CASE_STUDIES.slice(0, 2).map((item) => (
-            <div
-              key={item.id}
-              onClick={() => onSelectCaseStudy(item)}
-              className="group cursor-pointer rounded-3xl bg-white border border-border-subtle hover:border-border-muted hover:shadow-luxury-lg transition-all duration-500 overflow-hidden flex flex-col justify-between"
-            >
-              <div className="relative aspect-[16/10] overflow-hidden bg-canvas-muted">
-                <img
-                  src={item.heroImage}
-                  alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-103"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
-                <div className="absolute top-4 left-4">
-                  <span className="px-3.5 py-1 rounded-full bg-white/95 backdrop-blur-md border border-black/10 text-xs font-mono text-text-primary font-medium shadow-luxury-sm">
-                    {item.category}
-                  </span>
-                </div>
-                <div className="absolute bottom-4 right-4">
-                  <div className="w-12 h-12 rounded-full bg-white text-text-primary flex items-center justify-center transform translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 shadow-luxury-md">
-                    <ArrowUpRight className="w-5 h-5" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-8">
-                <div className="flex items-center justify-between text-xs font-mono text-text-muted mb-2">
-                  <span>{item.client}</span>
-                  <span>{item.year}</span>
-                </div>
-                <h3 className="type-h3 font-display font-bold text-text-primary mb-3 group-hover:text-accent-electric transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-text-secondary leading-relaxed mb-6 font-light">
-                  {item.tagline}
-                </p>
-
-                <div className="pt-4 border-t border-border-subtle flex items-center justify-between text-xs font-mono">
-                  <span className="text-text-muted">Primary Result:</span>
-                  <span className="text-accent-ink font-bold">{item.results[0].metric} {item.results[0].label}</span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <ProjectHoverList onSelectCaseStudy={onSelectCaseStudy} />
       </section>
 
-      {/* 5. THE STUDIO STANDARD COMPARISON */}
+      {/* 5. CREATIVE LAB & SHADER PLAYGROUND */}
+      <section className="px-6 md:px-12 max-w-7xl mx-auto">
+        <ShaderLab />
+      </section>
+
+      {/* 6. THE STUDIO STANDARD COMPARISON */}
       <section className="px-6 md:px-12 max-w-7xl mx-auto">
         <div className="rounded-3xl bg-white border border-border-subtle p-8 sm:p-14 shadow-luxury-md">
           <div className="mb-10 text-center max-w-2xl mx-auto">
@@ -352,7 +195,7 @@ export const HomePage = ({ setActivePage, onSelectCaseStudy }) => {
               Standard Digital Agency vs. Immersive Studio
             </h2>
             <p className="text-sm text-text-secondary leading-relaxed font-light">
-              Why high-growth ventures partner with our creative technologists rather than conventional marketing agencies.
+              Why high-growth ventures and global luxury houses partner with our creative technologists rather than conventional marketing agencies.
             </p>
           </div>
 
@@ -375,6 +218,33 @@ export const HomePage = ({ setActivePage, onSelectCaseStudy }) => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 7. BOTTOM MANIFESTO BANNER */}
+      <section className="px-6 md:px-12 max-w-7xl mx-auto">
+        <div className="rounded-3xl bg-accent-ink text-white p-8 sm:p-16 relative overflow-hidden shadow-luxury-lg">
+          <div className="max-w-3xl space-y-6 relative z-10">
+            <span className="text-xs font-mono uppercase tracking-eyebrow text-accent-electric block">
+              [ THE CREATIVE COMMITMENT ]
+            </span>
+            <h2 className="type-h2 font-display font-bold tracking-tight text-white">
+              We only take on four enterprise flagships per quarter.
+            </h2>
+            <p className="text-white/70 type-body font-light leading-relaxed">
+              Every pixel, shader, and kinetic curve is hand-crafted by our senior partners. No junior subcontractors. No template builders. Just pure, obsessive creative digital engineering.
+            </p>
+            <div className="pt-4">
+              <MagneticButton
+                variant="electric"
+                onClick={() => navigateTo('contact')}
+                className="py-4 px-8 text-sm"
+              >
+                <span>Check Q4 Availability</span>
+                <ArrowRight className="w-4 h-4" />
+              </MagneticButton>
+            </div>
           </div>
         </div>
       </section>
