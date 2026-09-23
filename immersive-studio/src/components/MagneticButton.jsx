@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'motion/react';
+import { sound } from '../lib/soundEngine';
 import { cn } from '../lib/utils';
 
 export const MagneticButton = ({
@@ -28,9 +29,18 @@ export const MagneticButton = ({
     y.set((e.clientY - centerY) * 0.3);
   };
 
+  const handleMouseEnter = () => {
+    sound.playHover();
+  };
+
   const handleMouseLeave = () => {
     x.set(0);
     y.set(0);
+  };
+
+  const handleClick = (e) => {
+    sound.playClick();
+    if (onClick) onClick(e);
   };
 
   const variantStyles = {
@@ -54,8 +64,9 @@ export const MagneticButton = ({
       disabled={disabled}
       style={{ x: springX, y: springY }}
       onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={onClick}
+      onClick={handleClick}
       className={cn(
         'group relative inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full text-xs uppercase tracking-widest font-mono transition-all duration-300 select-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-ink focus-visible:ring-offset-2',
         variantStyles[variant] || variantStyles.primary,
