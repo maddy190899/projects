@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { FlaskConical, Play, RotateCcw, Volume2, Sparkles, Layers, Sliders } from 'lucide-react';
+import { Volume2, Layers, Sliders } from 'lucide-react';
 import { sound } from '../utils/soundEngine';
 
 export const Laboratory = () => {
