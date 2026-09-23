@@ -1,78 +1,75 @@
 import { useState } from 'react';
 import SmoothScroll from './components/SmoothScroll';
+import CustomCursor from './components/CustomCursor';
 import Navbar from './components/Navbar';
 import InteractiveHero from './components/InteractiveHero';
-import { ClientLogos } from './components/VectorGraphic';
-import PortfolioShowcase from './components/PortfolioShowcase';
-import InteractiveCards from './components/InteractiveCards';
-import ServicesStack from './components/ServicesStack';
-import CostEstimator from './components/CostEstimator';
-import TestimonialsMetrics from './components/TestimonialsMetrics';
-import StudioTeam from './components/StudioTeam';
-import ProcessFaq from './components/ProcessFaq';
+import SelectedWork from './components/SelectedWork';
+import InteractiveCanvasLab from './components/InteractiveCanvasLab';
+import StudioCapabilities from './components/StudioCapabilities';
+import RecognitionAwards from './components/RecognitionAwards';
+import StudioManifesto from './components/StudioManifesto';
+import InquiryDrawer from './components/InquiryDrawer';
 import Footer from './components/Footer';
-import ContactModal from './components/ContactModal';
 
 export default function App() {
-  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
-  const [selectedEstimatorConfig, setSelectedEstimatorConfig] = useState(null);
-
-  const handleOpenQuoteModal = () => {
-    setSelectedEstimatorConfig(null);
-    setIsQuoteModalOpen(true);
-  };
-
-  const handleBookWithConfig = (configData) => {
-    setSelectedEstimatorConfig(configData);
-    setIsQuoteModalOpen(true);
-  };
+  const [inquiryOpen, setInquiryOpen] = useState(false);
+  const [cursorText, setCursorText] = useState('');
 
   return (
     <SmoothScroll>
-      <div className="min-h-screen bg-[#090A0F] text-[#F3F4F6] relative selection:bg-cyan-500/20 selection:text-cyan-300">
+      <div className="min-h-screen bg-[#09090b] text-[#f4f3ef] selection:bg-white selection:text-black relative bg-noise">
         
-        {/* Navigation Bar */}
-        <Navbar onOpenQuoteModal={handleOpenQuoteModal} />
+        {/* Custom Magnetic Cursor */}
+        <CustomCursor cursorText={cursorText} />
 
-        {/* Hero Section */}
+        {/* Global Editorial Navbar */}
+        <Navbar 
+          onOpenInquiry={() => setInquiryOpen(true)} 
+          setCursorText={setCursorText} 
+        />
+
+        {/* Editorial Main Flow */}
         <main>
+          {/* Hero Section with Interactive Liquid Canvas */}
           <InteractiveHero 
-            onOpenQuoteModal={handleOpenQuoteModal} 
+            onOpenInquiry={() => setInquiryOpen(true)} 
+            setCursorText={setCursorText} 
           />
 
-          {/* Semantic Real Client Logos Vector Banner */}
-          <ClientLogos />
+          {/* 01: Selected Commissions (Hover Reveal List + Grid) */}
+          <SelectedWork 
+            setCursorText={setCursorText} 
+            onOpenInquiry={() => setInquiryOpen(true)} 
+          />
 
-          {/* Selected Work & Real Image Portfolio */}
-          <PortfolioShowcase />
+          {/* 02: Interactive Canvas Lab (Procedural Shader Physics Console) */}
+          <InteractiveCanvasLab 
+            setCursorText={setCursorText} 
+          />
 
-          {/* Asymmetric Bento Architecture Grid */}
-          <InteractiveCards />
+          {/* 03: Disciplinary Architecture & Specification Matrix */}
+          <StudioCapabilities 
+            setCursorText={setCursorText} 
+            onOpenInquiry={() => setInquiryOpen(true)} 
+          />
 
-          {/* Disciplinary Capabilities & Architecture */}
-          <ServicesStack />
+          {/* 04: International Recognition & Press Quotes */}
+          <RecognitionAwards />
 
-          {/* Interactive Project Cost & Scope Estimator */}
-          <CostEstimator onBookWithConfig={handleBookWithConfig} />
-
-          {/* Quantitative Metrics & Executive Testimonials */}
-          <TestimonialsMetrics />
-
-          {/* Studio Leadership & Physical Workshop Showcase */}
-          <StudioTeam />
-
-          {/* 4-Stage Protocol & Interactive FAQ Accordion */}
-          <ProcessFaq onOpenQuoteModal={handleOpenQuoteModal} />
+          {/* 05: Studio Manifesto & Founding Partners */}
+          <StudioManifesto />
         </main>
 
-        {/* Footer */}
-        <Footer onOpenQuoteModal={handleOpenQuoteModal} />
+        {/* Global Footer */}
+        <Footer 
+          onOpenInquiry={() => setInquiryOpen(true)} 
+          setCursorText={setCursorText} 
+        />
 
-        {/* Interactive Consultation / Proposal Modal */}
-        <ContactModal 
-          isOpen={isQuoteModalOpen} 
-          onClose={() => setIsQuoteModalOpen(false)}
-          initialConfig={selectedEstimatorConfig}
+        {/* Commission / Inquiry Drawer */}
+        <InquiryDrawer 
+          isOpen={inquiryOpen} 
+          onClose={() => setInquiryOpen(false)} 
         />
 
       </div>
